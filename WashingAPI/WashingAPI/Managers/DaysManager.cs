@@ -6,7 +6,7 @@ using WashingAPI.Models;
 
 namespace WashingAPI.Managers
 {
-    public class Manager
+    public class DaysManager
     {
         private List<Day> days = new List<Day>()
         {
