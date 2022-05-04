@@ -20,7 +20,8 @@ namespace WashingAPI.Models
             {"16:30-18:00", null },
             {"18:00-19:30", null },
             {"19:30-21:00", null },
-        }
+        };
+        
             
 
     }
