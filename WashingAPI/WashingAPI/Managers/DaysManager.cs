@@ -21,6 +21,33 @@ namespace WashingAPI.Managers
             return new(days);
         }
 
+        public Day GetDay(string Date)
+        {
+            return null;
+        }
+
+        public void DeleteDay(string Date)
+        {
+
+        }
+
+        public void AddDay(string Date)
+        {
+
+        }
+
+        public void BookTime(string Date, string Time, string Room)
+        {
+
+        }
+
+        
+
+        public void RemoveBooking(string Date, string Time)
+        {
+
+        }
+
 
     }
 }
