@@ -16,6 +16,11 @@ namespace WashingAPI.Managers
             new Day(){Date="07-05-2022"},
         };
 
+        public List<Day> GetAllDays()
+        {
+            return new(days);
+        }
+
 
     }
 }
