@@ -1,4 +1,4 @@
-const loginID = "102474468596296399731"
+const url = "https://localhost:44323/api/Login/"
 
 window.onload = function(){
     checkCookie()
@@ -12,8 +12,6 @@ function init() {
 
 
 function onSignIn(googleUser) {
-    alert("fisk")
-    console.log("logger ind")
     var auth2 = gapi.auth2.getAuthInstance();
     var profile = auth2.currentUser.get().getBasicProfile();
     /*console.log('ID: ' + profile.getId());
@@ -22,7 +20,8 @@ function onSignIn(googleUser) {
     console.log('Family Name: ' + profile.getFamilyName());
     console.log('Image URL: ' + profile.getImageUrl());
     console.log('Email: ' + profile.getEmail());*/
-    setCookie(profile.getId())
+    checkGoogleID(profile.getId())
+    console.log(profile.getId())
     googleUser.disconnect()
 }
 
@@ -81,18 +80,34 @@ function getCookie(){
 }
 
 function setCookie(id){
-    console.log(id)
     document.cookie = "vasklet="+id+";path=/"
+    console.log(getCookie())
 }
 
 function checkCookie(){
     let sPath = window.location.pathname
+    console.log("cookie: (" + getCookie()+")")
     if(sPath != "/Frontend/login_test/login/"){
         
-        if(getCookie() != loginID){
-            console.log("cookie: " + getCookie() + " id: "+ loginID)
-            window.location.href = "/Frontend/login_test/file.html"
+        if(getCookie() == ""){
+            window.location.href = "/Frontend/login_test/fail.html"
         }            
+    }
+}
+
+async function checkGoogleID(id){
+    const newUrl = url+id
+    const response = await axios.get(newUrl)
+    const data = await response.data
+
+    if(data == id)
+    {
+        setCookie(id)
+        console.log("loged in successfully")
+        document.location.href = "/Frontend/login_test/"
+    }else{
+        console.log("no user was found!")
+        signOut()
     }
 }
 
