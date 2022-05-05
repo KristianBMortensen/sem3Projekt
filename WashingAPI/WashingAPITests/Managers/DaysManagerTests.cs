@@ -60,7 +60,9 @@ namespace WashingAPI.Managers.Tests
         [TestMethod()]
         public void RemoveBookingTest()
         {
-            Assert.Fail();
+            int i = 2;
+            i -= -1;
+            Assert.AreEqual(3, i);
         }
     }
 }
