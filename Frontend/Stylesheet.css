@@ -89,3 +89,24 @@ h5 {
 .row{
     text-align: center;
 }
+.square {
+    width: 150px;
+    height: 150px;
+    padding: 5px;
+    text-align: center;
+    display: inline-block;
+    position: relative;
+    background-color: blue;
+}
+
+.section-loaded {
+    display: inline-block;
+    float: left;
+}
+
+.section-toload {
+    display: inline-block;
+    float: left;
+    position: relative;
+    overflow: hidden;
+}
