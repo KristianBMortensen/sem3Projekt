@@ -21,7 +21,7 @@ namespace WashingAPI.Managers
             return new(days);
         }
 
-        public Day GetDay(string Date)
+        public Day? GetDay(string Date)
         {
             return days.FirstOrDefault((d) => d.Date == Date);
         }
