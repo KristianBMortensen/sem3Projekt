@@ -23,10 +23,10 @@ namespace WashingAPI.Controllers
         }
 
         // GET api/<ValuesController>/5
-        [HttpGet("{id}")]
-        public string Get(int id)
+        [HttpGet("{date}")]
+        public Day Get(string date)
         {
-            return "value";
+            return manager.GetDay(date);
         }
 
         // POST api/<ValuesController>
@@ -45,6 +45,11 @@ namespace WashingAPI.Controllers
         [HttpDelete("{id}")]
         public void Delete(int id)
         {
+        }
+        [HttpPost("{date}/book")]
+        public void BookTime(string date, string time, string room)
+        {
+            manager.BookTime(date, time, room);
         }
     }
 }
