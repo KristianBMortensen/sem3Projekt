@@ -12,19 +12,17 @@ function init() {
 
 
 function onSignIn(googleUser) {
+    alert("fisk")
     console.log("logger ind")
     var auth2 = gapi.auth2.getAuthInstance();
     var profile = auth2.currentUser.get().getBasicProfile();
-    console.log('ID: ' + profile.getId());
+    /*console.log('ID: ' + profile.getId());
     console.log('Full Name: ' + profile.getName());
     console.log('Given Name: ' + profile.getGivenName());
     console.log('Family Name: ' + profile.getFamilyName());
     console.log('Image URL: ' + profile.getImageUrl());
-    console.log('Email: ' + profile.getEmail());
-
-    console.log("loged ind")
+    console.log('Email: ' + profile.getEmail());*/
     setCookie(profile.getId())
-    console.log("cookie: "+getCookie())
     googleUser.disconnect()
 }
 
@@ -33,7 +31,7 @@ function signOut() {
     auth2.signOut().then(function () {
         console.log('User signed out.');
     });
-    document.cookie = "vasklet="
+    document.cookie = "vasklet=;path=/;expires=Thu, 01 Jan 1970 00:00:01 GMT;"
     window.location.href="/Frontend/login_test/login/"
 }
 
@@ -52,28 +50,18 @@ var onSuccess = function (){
 }
 
 var signinChanged = function (val) {
-    /*console.log('Signin state changed to ', val);
-    if(sPath == "/3.semProjekt/login/"){
-        window.location.href="/3.semProjekt/"
-    }
-    document.getElementById('logged_in').innerHTML = "logged in"
-    document.getElementById('logged_in').style.color = "green"*/
+    //skal være for ikke at få fejl, men ellers ligegyldig
+    //Bollsjen
 }
 
 var userChanged = function (user) {
-    /*if(user.getId()){
-      console.log(user.getId())
-      document.getElementById('logged_in').innerHTML = "logged in"
-        document.getElementById('logged_in').style.color = "green"
-    }*/
+    //skal være for ikke at få fejl, men ellers ligegyldig
+    //Bollsjen
 }
 
 var onFailure = function(){
-    /*let sPath = window.location.pathname
-    let sPage = sPath.substring(sPath.lastIndexOf('/') + 1)
-    if(sPath != "/3.semProjekt/login/"){
-        window.location.href="/3.semProjekt/login/"
-    }*/
+    //skal være for ikke at få fejl, men ellers ligegyldig
+    //Bollsjen
 }
 
 function getCookie(){
@@ -93,6 +81,7 @@ function getCookie(){
 }
 
 function setCookie(id){
+    console.log(id)
     document.cookie = "vasklet="+id+";path=/"
 }
 
@@ -105,6 +94,5 @@ function checkCookie(){
             window.location.href = "/Frontend/login_test/file.html"
         }            
     }
-    console.log("cookie: "+getCookie())
 }
 
