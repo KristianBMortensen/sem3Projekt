@@ -34,7 +34,7 @@ function signOut() {
         console.log('User signed out.');
     });
     document.cookie = "vasklet="
-    window.location.href="/3.semProjekt/login/"
+    window.location.href="/Frontend/login_test/login/"
 }
 
 gapi.load('auth2', function(){
@@ -89,7 +89,7 @@ function getCookie(){
         return c.substring(name.length, c.length);
         }
     }
-    return cookie;
+    return "";
 }
 
 function setCookie(id){
@@ -98,11 +98,11 @@ function setCookie(id){
 
 function checkCookie(){
     let sPath = window.location.pathname
-    if(sPath != "/3.semProjekt/login/"){
+    if(sPath != "/Frontend/login_test/login/"){
         
         if(getCookie() != loginID){
             console.log("cookie: " + getCookie() + " id: "+ loginID)
-            window.location.href = "/3.semProjekt/file.html"
+            window.location.href = "/Frontend/login_test/file.html"
         }            
     }
     console.log("cookie: "+getCookie())
