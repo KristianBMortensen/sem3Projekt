@@ -13,6 +13,7 @@ namespace WashingAPI.Managers.Tests
     public class DaysManagerTests
     {
         DaysManager _daysManager;
+
         [TestInitialize]
         public void init()
         {
@@ -34,35 +35,11 @@ namespace WashingAPI.Managers.Tests
         }
 
         [TestMethod()]
-        public void DeleteDayTest()
-        {
-            _daysManager.DeleteDay("04-05-2022");
-            var days = _daysManager.GetAllDays();
-            Assert.IsFalse(days.Any((d) => d.Date == "04-05-2022"));
-        }
-
-        [TestMethod()]
-        public void AddDayTest()
-        {
-            _daysManager.AddDay("20-12-1999");
-            var days = _daysManager.GetAllDays();
-            Assert.IsTrue(days.Any((d) => d.Date == "20-12-1999"));
-        }
-
-        [TestMethod()]
         public void BookTimeTest()
         {
             _daysManager.BookTime("04-05-2022", "7:30-9:00", "14");
             var day = _daysManager.GetDay("04-05-2022");
             Assert.AreEqual("14", day.Timeslots["7:30-9:00"]);
-        }
-
-        [TestMethod()]
-        public void RemoveBookingTest()
-        {
-            int i = 2;
-            i -= -1;
-            Assert.AreEqual(3, i);
         }
     }
 }
