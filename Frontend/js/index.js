@@ -1,7 +1,14 @@
 const url = "https://localhost:44323/api/Login/"
-
 window.onload = function(){
-    checkCookie()
+    let googleBtn = document.getElementById('google-login-btn')
+    auth2.attachClickHandler(googleBtn, {},
+        function(googleUser) {
+          document.getElementById('login-btn-text').innerText = "Signed in: " +
+              googleUser.getBasicProfile().getName();
+              onSignIn(googleUser)
+        }, function(error) {
+          alert(JSON.stringify(error, undefined, 2));
+        });
 }
 
 function init() {
@@ -21,8 +28,8 @@ function onSignIn(googleUser) {
     console.log('Image URL: ' + profile.getImageUrl());
     console.log('Email: ' + profile.getEmail());*/
     checkGoogleID(profile.getId())
-    console.log(profile.getId())
     googleUser.disconnect()
+    window.location.href="/"
 }
 
 function signOut() {
@@ -31,68 +38,19 @@ function signOut() {
         console.log('User signed out.');
     });
     document.cookie = "vasklet=;path=/;expires=Thu, 01 Jan 1970 00:00:01 GMT;"
-    window.location.href="/login_test/login/"
+    window.location.href="/login.html"
 }
 
 gapi.load('auth2', function(){
     auth2 = gapi.auth2.init({
         client_id: '842417189442-1vfdnhn31bm7poc2ba3sf5qvhj3dguvj.apps.googleusercontent.com'
     });
-    auth2.attachClickHandler('signin-button', {}, onSuccess, onFailure);
-
-    auth2.isSignedIn.listen(signinChanged);
-    auth2.currentUser.listen(userChanged); // This is what you use to listen for user changes
+    // This is what you use to listen for user changes
 });
-
-var onSuccess = function (){
-    getCookie()
-}
-
-var signinChanged = function (val) {
-    //skal være for ikke at få fejl, men ellers ligegyldig
-    //Bollsjen
-}
-
-var userChanged = function (user) {
-    //skal være for ikke at få fejl, men ellers ligegyldig
-    //Bollsjen
-}
-
-var onFailure = function(){
-    //skal være for ikke at få fejl, men ellers ligegyldig
-    //Bollsjen
-}
-
-function getCookie(){
-    let name = "vasklet=";
-    let decodedCookie = decodeURIComponent(document.cookie);
-    let ca = decodedCookie.split(';');
-    for(let i = 0; i < ca.length; i++) {
-        let c = ca[i];
-        while (c.charAt(0) == ' ') {
-        c = c.substring(1);
-        }
-        if (c.indexOf(name) == 0) {
-        return c.substring(name.length, c.length);
-        }
-    }
-    return "";
-}
 
 function setCookie(id){
     document.cookie = "vasklet="+id+";path=/"
     console.log(getCookie())
-}
-
-function checkCookie(){
-    let sPath = window.location.pathname
-    console.log("cookie: (" + getCookie()+")")
-    if(sPath != "/login_test/login/"){
-        
-        if(getCookie() == ""){
-            window.location.href = "/login_test/fail.html"
-        }            
-    }
 }
 
 async function checkGoogleID(id){
@@ -110,4 +68,3 @@ async function checkGoogleID(id){
         signOut()
     }
 }
-
