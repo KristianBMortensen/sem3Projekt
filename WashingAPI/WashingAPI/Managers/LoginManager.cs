@@ -7,29 +7,29 @@ namespace WashingAPI.Managers
 {
     public class LoginManager
     {
-        private List<string> Tokens;
+        private Dictionary<string, string> Tokens;
 
         public LoginManager()
         {
             Tokens = new();
-            Tokens.Add("102474468596296399731");
+            Tokens.Add("102474468596296399731", "27A");
         }
 
-        public List<string> GetAllTokens()
+        public Dictionary<string,string> GetAllTokens()
         {
             return Tokens;
         }
 
         public string GetToken(string id)
         {
-            return Tokens.Find(t => t == id);
+            return Tokens[id];
         }
 
-        public bool CreateToken(string id)
+        public bool CreateToken(string id, string lejlighedsNummer)
         {
             if (GetToken(id) == null)
             {
-                Tokens.Add(id);
+                Tokens.Add(id,lejlighedsNummer);
                 return true;
             }
 
