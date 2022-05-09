@@ -1,5 +1,3 @@
-const url = "https://localhost:44323/api/Login/"
-
 window.onload = function(){
     checkCookie()
 }
@@ -9,7 +7,6 @@ function checkCookie(){
     if(sPath != "/login.html"){
         
         if(getCookie() == ""){
-            console.log("cookie: " + getCookie() + " id: "+ loginID)
             window.location.href = "/access_denied/fail.html"
         }            
     }

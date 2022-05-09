@@ -29,7 +29,6 @@ function onSignIn(googleUser) {
     console.log('Email: ' + profile.getEmail());*/
     checkGoogleID(profile.getId())
     googleUser.disconnect()
-    window.location.href="/"
 }
 
 function signOut() {
@@ -50,7 +49,6 @@ gapi.load('auth2', function(){
 
 function setCookie(id){
     document.cookie = "vasklet="+id+";path=/"
-    console.log(getCookie())
 }
 
 async function checkGoogleID(id){
@@ -62,7 +60,7 @@ async function checkGoogleID(id){
     {
         setCookie(id)
         console.log("loged in successfully")
-        document.location.href = "/Frontend/login_test/"
+        document.location.href = "/"
     }else{
         console.log("no user was found!")
         signOut()
