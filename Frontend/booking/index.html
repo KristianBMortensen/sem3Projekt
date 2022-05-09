@@ -19,7 +19,6 @@
 </head>
 
 <body>
-    <script src="/js/checkLogedin.js"></script>
     <nav>
         <div class="logo">
             <h4>
@@ -42,6 +41,11 @@
             <li>
                 <a href="/Kontakt.html">KONTAKT</a>
             </li>
+            <template v-if="adminAllowed">
+                <li>
+                    <a href="/admin/">ADMIN</a>
+                </li>
+            </template>
 
         </ul>
         <div class="burger">
@@ -76,5 +80,6 @@
         </div>
 
     </footer>
+    <script src="/js/checkLogedin.js"></script>
     <script src="/js/booking.js"></script>
 </body>

@@ -23,13 +23,42 @@ namespace WashingAPI.Managers
             return OprettelseRequests;
         }
 
-        public int CreateSignupRequest(string id, string fornavn, string efternavn, string lejlighedsnummer)
+        public KeyValuePair<string, LoginOprettelsesRequest> GetRequest(string id)
+        {
+
+            foreach (KeyValuePair<string, LoginOprettelsesRequest> pair in OprettelseRequests)
+            {
+                if (pair.Key == id)
+                {
+                    return new KeyValuePair<string, LoginOprettelsesRequest>(pair.Key, pair.Value);
+                    break;
+                }
+            }
+
+            return new KeyValuePair<string, LoginOprettelsesRequest> (null, null);
+
+        }
+
+        public bool CreateSignupRequest(string id, string fornavn, string efternavn, string lejlighedsnummer)
         {
             OprettelseRequests.Add(id, new LoginOprettelsesRequest(fornavn, efternavn, lejlighedsnummer));
                 if (OprettelseRequests[id] != null)
-                    return OprettelseRequests.Count();
+                    return true;
 
-                return 0;
+                return false;
+        }
+
+        public bool CreateLogin(string id, string room)
+        {
+            if (!_manager.CreateToken(id, room)) return false;
+            OprettelseRequests.Remove(id);
+            return true;
+        }
+
+        public bool DeleteRequest(string id)
+        {
+            OprettelseRequests.Remove(id);
+            return true;
         }
     }
 }

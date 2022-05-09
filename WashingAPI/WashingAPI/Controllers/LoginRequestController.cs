@@ -21,21 +21,49 @@ namespace WashingAPI.Controllers
         {
             _manager = new();
         }
-            // GET: api/<LoginRequestController>
-            [HttpGet("requests")]
-        public ActionResult<Dictionary<string, LoginOprettelsesRequest>> Get()
+
+        // GET: api/<LoginRequestController>
+        [HttpGet]
+
+    public ActionResult<Dictionary<string, LoginOprettelsesRequest>> Get()
         {
             Dictionary<string, LoginOprettelsesRequest> requests = _manager.GetAllRequests();
             if (requests == null) return StatusCode(404);
             return Ok(requests);
         }
 
-        [HttpPost("{id}/opretRequest")]
+        [HttpGet("{id}")]
+        public ActionResult<KeyValuePair<string, LoginOprettelsesRequest>> GetRequest(string id)
+        {
+            KeyValuePair<string, LoginOprettelsesRequest> pair = new KeyValuePair<string, LoginOprettelsesRequest>(_manager.GetRequest(id).Key, _manager.GetRequest(id).Value);
+            if (pair.Key == null) return NotFound();
+            return Ok(pair);
+        }
+
+        //Opretter request for at få et login for denne google konto og lejlighedsnummer
+        [HttpPost("{id}")]
         public ActionResult<int> Post(string id, string fornavn, string efternavn, string lejlighedsnummer)
         {
-            int oprettet = _manager.CreateSignupRequest(id, fornavn, efternavn, lejlighedsnummer);
-            if (oprettet == 0) return StatusCode(418);
+            bool oprettet = _manager.CreateSignupRequest(id, fornavn, efternavn, lejlighedsnummer);
+            if (!oprettet) return StatusCode(418);
             return Ok(oprettet);
+        }
+
+        //Login anmodning accepteret
+        //Opretter et login for denne google account
+        [HttpPut("{id}")]
+        public ActionResult<bool> Put(string id, string room)
+        {
+            if (!_manager.CreateLogin(id, room)) return StatusCode(500);
+            return Ok(true);
+        }
+
+        //Sletter login anmodning fra systemet
+        [HttpDelete("{id}")]
+        public ActionResult<bool> Delete(string id)
+        {
+            if (!_manager.DeleteRequest(id)) return StatusCode(500);
+            return Ok(true);
         }
 
     }

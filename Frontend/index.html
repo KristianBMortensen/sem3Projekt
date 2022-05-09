@@ -16,8 +16,7 @@
     </head>
 
     <body>
-        <script src="/js/checkLogedin.js"></script>
-        <nav>
+        <nav id="navigation">
             <div class="logo">
                 <h4>
                     VaskLet
@@ -39,6 +38,11 @@
                 <li>
                     <a href="/Kontakt.html">KONTAKT</a>
                 </li>
+                <template v-if="adminAllowed">
+                    <li>
+                        <a href="/admin/">ADMIN</a>
+                    </li>
+                </template>
 
             </ul>
             <div class="burger">
@@ -72,6 +76,7 @@
                 </div>
             </div>
     </main>
+    <script src="/js/checkLogedin.js"></script>
    <script src="/js/GetDays.js"></script>
     <footer>
         <div class="footer-content">

@@ -49,7 +49,7 @@ Vue.createApp({
     methods: {
         async sendRequest(){
             if(googleId.value != null && this.fornavn != null && this.efternavn != null && this.lejlighedsnummer != null){
-                const newUrl = url + googleId.value +"/opretRequest?fornavn="+this.fornavn+"&efternavn="+this.efternavn+"&lejlighedsnummer="+this.lejlighedsnummer
+                const newUrl = url + googleId.value +"?fornavn="+this.fornavn+"&efternavn="+this.efternavn+"&lejlighedsnummer="+this.lejlighedsnummer
                 const response = await axios.post(newUrl)
                 this.requestStatus = await response.status
             }else{
