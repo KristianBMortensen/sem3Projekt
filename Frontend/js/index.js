@@ -1,7 +1,13 @@
-const loginID = "102474468596296399731"
-
 window.onload = function(){
-    checkCookie()
+    let googleBtn = document.getElementById('google-login-btn')
+    auth2.attachClickHandler(googleBtn, {},
+        function(googleUser) {
+          document.getElementById('login-btn-text').innerText = "Signed in: " +
+              googleUser.getBasicProfile().getName();
+              onSignIn(googleUser)
+        }, function(error) {
+          alert(JSON.stringify(error, undefined, 2));
+        });
 }
 
 function init() {
@@ -12,7 +18,6 @@ function init() {
 
 
 function onSignIn(googleUser) {
-    alert("fisk")
     console.log("logger ind")
     var auth2 = gapi.auth2.getAuthInstance();
     var profile = auth2.currentUser.get().getBasicProfile();
@@ -24,6 +29,7 @@ function onSignIn(googleUser) {
     console.log('Email: ' + profile.getEmail());*/
     setCookie(profile.getId())
     googleUser.disconnect()
+    window.location.href="/"
 }
 
 function signOut() {
@@ -32,67 +38,17 @@ function signOut() {
         console.log('User signed out.');
     });
     document.cookie = "vasklet=;path=/;expires=Thu, 01 Jan 1970 00:00:01 GMT;"
-    window.location.href="/Frontend/login_test/login/"
+    window.location.href="/login.html"
 }
 
 gapi.load('auth2', function(){
     auth2 = gapi.auth2.init({
         client_id: '842417189442-1vfdnhn31bm7poc2ba3sf5qvhj3dguvj.apps.googleusercontent.com'
     });
-    auth2.attachClickHandler('signin-button', {}, onSuccess, onFailure);
-
-    auth2.isSignedIn.listen(signinChanged);
-    auth2.currentUser.listen(userChanged); // This is what you use to listen for user changes
+    // This is what you use to listen for user changes
 });
-
-var onSuccess = function (){
-    getCookie()
-}
-
-var signinChanged = function (val) {
-    //skal være for ikke at få fejl, men ellers ligegyldig
-    //Bollsjen
-}
-
-var userChanged = function (user) {
-    //skal være for ikke at få fejl, men ellers ligegyldig
-    //Bollsjen
-}
-
-var onFailure = function(){
-    //skal være for ikke at få fejl, men ellers ligegyldig
-    //Bollsjen
-}
-
-function getCookie(){
-    let name = "vasklet=";
-    let decodedCookie = decodeURIComponent(document.cookie);
-    let ca = decodedCookie.split(';');
-    for(let i = 0; i < ca.length; i++) {
-        let c = ca[i];
-        while (c.charAt(0) == ' ') {
-        c = c.substring(1);
-        }
-        if (c.indexOf(name) == 0) {
-        return c.substring(name.length, c.length);
-        }
-    }
-    return "";
-}
 
 function setCookie(id){
     console.log(id)
     document.cookie = "vasklet="+id+";path=/"
 }
-
-function checkCookie(){
-    let sPath = window.location.pathname
-    if(sPath != "/Frontend/login_test/login/"){
-        
-        if(getCookie() != loginID){
-            console.log("cookie: " + getCookie() + " id: "+ loginID)
-            window.location.href = "/Frontend/login_test/file.html"
-        }            
-    }
-}
-
