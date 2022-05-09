@@ -1,4 +1,4 @@
-const loginID = "102474468596296399731"
+const url = "https://localhost:44323/api/Login/"
 
 window.onload = function(){
     checkCookie()
@@ -8,7 +8,7 @@ function checkCookie(){
     let sPath = window.location.pathname
     if(sPath != "/login.html"){
         
-        if(getCookie() != loginID){
+        if(getCookie() == ""){
             console.log("cookie: " + getCookie() + " id: "+ loginID)
             window.location.href = "/access_denied/fail.html"
         }            

@@ -28,7 +28,6 @@ function onSignIn(googleUser) {
     console.log('Image URL: ' + profile.getImageUrl());
     console.log('Email: ' + profile.getEmail());*/
     checkGoogleID(profile.getId())
-    console.log(profile.getId())
     googleUser.disconnect()
     window.location.href="/"
 }
@@ -52,4 +51,20 @@ gapi.load('auth2', function(){
 function setCookie(id){
     document.cookie = "vasklet="+id+";path=/"
     console.log(getCookie())
+}
+
+async function checkGoogleID(id){
+    const newUrl = url+id
+    const response = await axios.get(newUrl)
+    const data = await response.data
+
+    if(data == id)
+    {
+        setCookie(id)
+        console.log("loged in successfully")
+        document.location.href = "/Frontend/login_test/"
+    }else{
+        console.log("no user was found!")
+        signOut()
+    }
 }
