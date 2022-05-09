@@ -4,7 +4,7 @@ window.onload = function(){
 
 function checkCookie(){
     let sPath = window.location.pathname
-    if(sPath != "/login.html"){
+    if(sPath != "/login/"){
         
         if(getCookie() == ""){
             window.location.href = "/access_denied/fail.html"

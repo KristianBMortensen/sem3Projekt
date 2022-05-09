@@ -28,6 +28,7 @@ function onSignIn(googleUser) {
     console.log('Image URL: ' + profile.getImageUrl());
     console.log('Email: ' + profile.getEmail());*/
     checkGoogleID(profile.getId())
+    console.log(profile.getId())
     googleUser.disconnect()
 }
 
@@ -37,7 +38,7 @@ function signOut() {
         console.log('User signed out.');
     });
     document.cookie = "vasklet=;path=/;expires=Thu, 01 Jan 1970 00:00:01 GMT;"
-    window.location.href="/login.html"
+    document.getElementById('login-btn-text').innerText = "SIGN IN WITH GOOGLE"
 }
 
 gapi.load('auth2', function(){

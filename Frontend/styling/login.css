@@ -91,3 +91,8 @@
     float: left;
     padding: 5px
 }
+
+.login-opretbruger-text {
+    font-size: 14px;
+    text-transform: none;
+}

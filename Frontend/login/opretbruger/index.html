@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <!-- Bootstrap CSS -->
+        <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+        <link rel="stylesheet" href="/styling/Stylesheet.css">
+        <link rel="stylesheet" href="/styling/login.css">
+        <meta name="google-signin-client_id" content="842417189442-1vfdnhn31bm7poc2ba3sf5qvhj3dguvj.apps.googleusercontent.com">
+        <script src="https://apis.google.com/js/platform.js?onload=init" async defer></script>
+        <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+        <script src="https://unpkg.com/vue@next"></script>
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" integrity="sha512-1ycn6IcaQQ40/MKBW2W4Rhis/DbILU74C1vSrLJxCq57o941Ym01SwNsOMqvEBFlcgUa6xLiPY/NS5R+E6ztJQ==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+        <title>Vasklet Login</title>
+        
+    </head>
+
+    <body>
+        
+        <nav>
+            <div class="logo">
+                <h4>
+                    VaskLet
+                </h4>
+            </div>
+            <ul class="nav-links">
+                <li>
+                    <a href="/">HOME</a>
+                </li>
+                <li>
+                    <a href="/booking/">OVERSIGT</a>
+                </li>
+                <li>
+                    <a href="/Minside.html">MIN SIDE</a>
+                </li>
+                <li>
+                    <a href="/login/">LOGIN</a>
+                </li>
+                <li>
+                    <a href="/Kontakt.html">KONTAKT</a>
+                </li>
+
+            </ul>
+            <div class="burger">
+                <div class="line1"></div>
+                <div class="line2"></div>
+                <div class="line3"></div>
+            </div>
+
+        </nav>
+
+        <main class="container-33" id="app">
+            <div class="login-wrapper">
+                <div class="login-title-box">
+                    <h1 class="login-title">OPRETBRUGER</h1>
+                </div>
+                <div class="login-body" style="border:none">
+                    <form class="login-form">
+                        <div class="login-input-control">
+                            <label style="text-transform: none;">Fornavn</label>
+                            <input type="text" class="login-input" v-model="fornavn" />
+                        </div>
+
+                        <div class="login-input-control">
+                            <label style="text-transform: none;">Efternavn</label>
+                            <input type="text" class="login-input" v-model="efternavn" />
+                        </div>
+
+                        <div class="login-input-control">
+                            <label style="text-transform: none;">Lejlighedsnummer</label>
+                            <input type="email" class="login-input" v-model="lejlighedsnummer" />
+                        </div>
+
+                        <input type="hidden" v-model="googleId" id="google-id">
+                        <span id="google-status"></span>
+                        <div class="google-login-btn customGPlusSignIn" id="google-login-btn">
+                            <img src="/styling/Google_ G _Logo.svg">
+                            <span id="login-btn-text">SIGN IN WITH GOOGLE</span>
+                        </div>
+                        
+                        <button type="button" class="btn btn-primary login-form-submit" @click="sendRequest()">ANMOD</button>
+                        <span>{{requestStatus}}</span>
+                    </form>
+                </div>
+            </div>
+        </main>
+        <script src="/js/opret-bruger.js"></script>
+    </body>
+</html>
