@@ -65,26 +65,37 @@
             </div>
         </div>
 
-        <div class="CV">
-            <br>
-            <h4>
-            </h4>
-            <br>
-
-            <h6 class="CV">
-            </h6>
-
-
-
-        </div>
-        <footer>
-            <div class="footer-content">
-                <p>
-                    Ved problemer kontakt viceværten på telefon xx xx xx xx eller på email: xxxx@xxxxx.dk
-                </p>
-
+    <main id="app">
+            <div class="container-fluid">
+                <div class="row">
+                    <div class="col-3" v-if="days" v-for="d in days">
+                            <table class="table table-striped">
+                                <thead>
+                                    <tr>
+                                        <th>Dato:</th>
+                                        <th>{{d.date}}</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr v-for="(value, name) in d.timeslots">
+                                            <td style="padding: 0%;">{{name}}</td>
+                                            <td v-if="value" style="padding: 0%;">{{value}}</td>
+                                            <td v-else style="padding: 0%;">Fri</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                    </div>
+                </div>
             </div>
+    </main>
+   
 
-        </footer>
-    </body>
-</html>
+   <script src="/js/GetDays.js"></script>
+    <footer>
+        <div class="footer-content">
+            <p>
+                Ved problemer kontakt viceværten på telefon xx xx xx xx eller på email: xxxx@xxxxx.dk
+            </p>
+        </div>
+    </footer>
+</body>

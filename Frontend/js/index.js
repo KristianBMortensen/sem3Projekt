@@ -1,3 +1,4 @@
+const url = "https://localhost:44323/api/Login/"
 window.onload = function(){
     let googleBtn = document.getElementById('google-login-btn')
     auth2.attachClickHandler(googleBtn, {},
@@ -18,7 +19,6 @@ function init() {
 
 
 function onSignIn(googleUser) {
-    console.log("logger ind")
     var auth2 = gapi.auth2.getAuthInstance();
     var profile = auth2.currentUser.get().getBasicProfile();
     /*console.log('ID: ' + profile.getId());
@@ -27,7 +27,8 @@ function onSignIn(googleUser) {
     console.log('Family Name: ' + profile.getFamilyName());
     console.log('Image URL: ' + profile.getImageUrl());
     console.log('Email: ' + profile.getEmail());*/
-    setCookie(profile.getId())
+    checkGoogleID(profile.getId())
+    console.log(profile.getId())
     googleUser.disconnect()
     window.location.href="/"
 }
@@ -49,6 +50,6 @@ gapi.load('auth2', function(){
 });
 
 function setCookie(id){
-    console.log(id)
     document.cookie = "vasklet="+id+";path=/"
+    console.log(getCookie())
 }
