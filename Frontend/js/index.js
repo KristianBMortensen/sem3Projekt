@@ -31,7 +31,7 @@ function signOut() {
         console.log('User signed out.');
     });
     document.cookie = "vasklet=;path=/;expires=Thu, 01 Jan 1970 00:00:01 GMT;"
-    window.location.href="/Frontend/login_test/login/"
+    window.location.href="/login_test/login/"
 }
 
 gapi.load('auth2', function(){
@@ -87,10 +87,10 @@ function setCookie(id){
 function checkCookie(){
     let sPath = window.location.pathname
     console.log("cookie: (" + getCookie()+")")
-    if(sPath != "/Frontend/login_test/login/"){
+    if(sPath != "/login_test/login/"){
         
         if(getCookie() == ""){
-            window.location.href = "/Frontend/login_test/fail.html"
+            window.location.href = "/login_test/fail.html"
         }            
     }
 }
@@ -104,7 +104,7 @@ async function checkGoogleID(id){
     {
         setCookie(id)
         console.log("loged in successfully")
-        document.location.href = "/Frontend/login_test/"
+        document.location.href = "/login_test/"
     }else{
         console.log("no user was found!")
         signOut()

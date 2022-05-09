@@ -22,7 +22,7 @@ namespace WashingAPI.Controllers
 
         // GET: api/<LoginController>
         [HttpGet]
-        public IEnumerable<string> Get()
+        public Dictionary<string,string> Get()
         {
             return _manager.GetAllTokens();
         }
@@ -39,9 +39,9 @@ namespace WashingAPI.Controllers
 
         // POST api/<LoginController>
         [HttpPost]
-        public bool Post([FromBody] string id)
+        public bool Post([FromBody] string id, [FromQuery] string lejlighedNummer)
         {
-            return _manager.CreateToken(id);
+            return _manager.CreateToken(id, lejlighedNummer);
         }
 
         // PUT api/<LoginController>/5
