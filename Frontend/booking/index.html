@@ -27,19 +27,19 @@
         </div>
         <ul class="nav-links">
             <li>
-                <a href="Index.html">HOME</a>
+                <a href="/">HOME</a>
             </li>
             <li>
-                <a href="Booking.html">OVERSIGT</a>
+                <a href="/booking/">OVERSIGT</a>
             </li>
             <li>
-                <a href="Minside.html">MIN SIDE</a>
+                <a href="/Minside.html">MIN SIDE</a>
             </li>
             <li>
-                <a href="Login.html">LOGIN</a>
+                <a href="/logud.html">LOGUD</a>
             </li>
             <li>
-                <a href="Kontakt.html">KONTAKT</a>
+                <a href="/Kontakt.html">KONTAKT</a>
             </li>
 
         </ul>
@@ -62,7 +62,7 @@
                 </template>
             </select>
             <input class="form-control" v-model="booking.room">
-            <buton class="btn btn-primary" @click="createBooking()">Book nu</buton>
+            <button class="btn btn-primary" @click="createBooking()">Book nu</button>
             <span>{{bookingStatus}}</span>
     </main>
     
