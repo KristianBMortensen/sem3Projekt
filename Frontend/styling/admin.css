@@ -1,3 +1,7 @@
+.admin-container h1, .admin-container h3{
+    text-align: left;
+}
+
 .admin-request-table {
     text-align: left;
 }
