@@ -16,6 +16,7 @@ Vue.createApp({
             try{
                 const response = await axios.get(URL)
                 this.days = await response.data
+                console.log(this.days[0])
             }
             catch(e){
                 console.log(e.message)
