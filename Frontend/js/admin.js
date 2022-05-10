@@ -14,7 +14,6 @@ Vue.createApp({
         },
         async remove(){
             if(this.requestId != null){
-                //console.log(this.requestId)
                 try{
                     const response = await axios.delete(url + this.requestId)
                 }catch(err){
