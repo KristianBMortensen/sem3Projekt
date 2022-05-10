@@ -2,38 +2,30 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
-using WashingAPI.Models;
 using WashingAPI.DBModels;
+using Microsoft.EntityFrameworkCore;
 
 namespace WashingAPI.Managers
 {
     public class DaysManager
     {
-        private static List<Models.Day> days = new List<Models.Day>()
-        {
-            new Models.Day(){Date="04-05-2022"},
-            new Models.Day(){Date="05-05-2022"},
-            new Models.Day(){Date="06-05-2022"},
-            new Models.Day(){Date="07-05-2022"},
-        };
-
         private Sem3Context _context = new();
 
-        public List<Models.Day> GetAllDays()
+        public List<Day> GetAllDays()
         {
-            return new(days);
+            var days = _context.Days.AsNoTracking().Include((d) => d.Timeslots).ToList();
+            return days;
         }
 
-        public Models.Day? GetDay(string Date)
+        public Day? GetDay(string Date)
         {
-            return days.FirstOrDefault((d) => d.Date == Date);
+            return _context.Days.AsNoTracking().Include((d) => d.Timeslots).FirstOrDefault((d) => d.ResDate == Date);
         }
 
-        public void BookTime(string Date, string Time, string Room)
+        public void BookTime(int TimeslotID, string Room)
         {
-            var day = GetDay(Date);
-            if (!(day.Timeslots[Time] == null)) throw new ArgumentException();
-            day.Timeslots[Time] = Room;
+            _context.Timeslots.Find(TimeslotID).RoomNo = Room;
+            _context.SaveChanges();
         }
 
         public void AddDay(string date)

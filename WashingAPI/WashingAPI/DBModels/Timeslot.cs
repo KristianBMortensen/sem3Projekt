@@ -18,8 +18,10 @@ namespace WashingAPI.DBModels
         public string ResTime { get; set; }
         [StringLength(255)]
         public string RoomNo { get; set; }
+        [System.Text.Json.Serialization.JsonIgnore]
         public int DayId { get; set; }
 
+        [System.Text.Json.Serialization.JsonIgnore]
         [ForeignKey(nameof(DayId))]
         [InverseProperty("Timeslots")]
         public virtual Day Day { get; set; }

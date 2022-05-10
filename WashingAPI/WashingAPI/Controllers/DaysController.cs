@@ -4,7 +4,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using WashingAPI.Managers;
-using WashingAPI.Models;
+using WashingAPI.DBModels;
 
 // For more information on enabling Web API for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
 
@@ -36,21 +36,10 @@ namespace WashingAPI.Controllers
             manager.AddDay(date);
         }
 
-        // PUT api/<ValuesController>/5
-        [HttpPut("{id}")]
-        public void Put(int id, [FromBody] string value)
+        [HttpPost("{TimeslotID}/book")]
+        public void BookTime(int TimeslotID, string room)
         {
-        }
-
-        // DELETE api/<ValuesController>/5
-        [HttpDelete("{id}")]
-        public void Delete(int id)
-        {
-        }
-        [HttpPost("{date}/book")]
-        public void BookTime(string date, string time, string room)
-        {
-            manager.BookTime(date, time, room);
+            manager.BookTime(TimeslotID, room);
         }
     }
 }
