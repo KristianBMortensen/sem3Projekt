@@ -1,0 +1,31 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.1.32319.34
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "UDP proxy", "UDP proxy\UDP proxy.csproj", "{FB61A1AC-C7FB-4C6F-8DF6-076808D8C50E}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "UDP broadcaster", "UDP broadcaster\UDP broadcaster.csproj", "{7525A03E-7AF6-4DD8-B6B3-13BBFD9CD81A}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{FB61A1AC-C7FB-4C6F-8DF6-076808D8C50E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{FB61A1AC-C7FB-4C6F-8DF6-076808D8C50E}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{FB61A1AC-C7FB-4C6F-8DF6-076808D8C50E}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{FB61A1AC-C7FB-4C6F-8DF6-076808D8C50E}.Release|Any CPU.Build.0 = Release|Any CPU
+		{7525A03E-7AF6-4DD8-B6B3-13BBFD9CD81A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{7525A03E-7AF6-4DD8-B6B3-13BBFD9CD81A}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{7525A03E-7AF6-4DD8-B6B3-13BBFD9CD81A}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{7525A03E-7AF6-4DD8-B6B3-13BBFD9CD81A}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {14FBF879-7462-4C77-AF1C-5807AC20EB28}
+	EndGlobalSection
+EndGlobal

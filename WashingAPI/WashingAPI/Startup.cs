@@ -32,7 +32,6 @@ namespace WashingAPI
             {
                 c.SwaggerDoc("v1", new OpenApiInfo { Title = "WashingAPI", Version = "v1" });
             });
-
             services.AddCors(options => options.AddPolicy("AllowAll", builder => builder.AllowAnyOrigin().AllowAnyMethod().AllowAnyHeader()));
         }
 
