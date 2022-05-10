@@ -23,9 +23,27 @@ function getCookie(){
         c = c.substring(1);
         }
         if (c.indexOf(name) == 0) {
-            console.log(c.substring(name.length, c.length))
-        return c.substring(name.length, c.length);
+            return c.substring(name.length, c.length);
         }
     }
     return "";
 }
+
+Vue.createApp({
+    data(){
+        return{
+            adminAllowed: true
+        }
+    },
+    async created(){
+        if(getCookie() != "")
+        {
+            this.adminAllowed = true
+        }else{
+            console.log("admin not allowed")
+        }
+    },
+    methods: {
+
+    }
+}).mount("#navigation")
