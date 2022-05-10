@@ -18,6 +18,14 @@
          "ObjectType": 0
       },
       {
+         "Name": "[dbo].[login]",
+         "ObjectType": 0
+      },
+      {
+         "Name": "[dbo].[loginRequest]",
+         "ObjectType": 0
+      },
+      {
          "Name": "[dbo].[Timeslot]",
          "ObjectType": 0
       }

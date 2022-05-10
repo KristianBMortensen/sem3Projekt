@@ -20,6 +20,8 @@ namespace WashingAPI.DBModels
         }
 
         public virtual DbSet<Day> Days { get; set; }
+        public virtual DbSet<Login> Logins { get; set; }
+        public virtual DbSet<LoginRequest> LoginRequests { get; set; }
         public virtual DbSet<Timeslot> Timeslots { get; set; }
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
@@ -34,6 +36,39 @@ namespace WashingAPI.DBModels
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             modelBuilder.HasAnnotation("Relational:Collation", "SQL_Latin1_General_CP1_CI_AS");
+
+            modelBuilder.Entity<Day>(entity =>
+            {
+                entity.Property(e => e.ResDate).IsUnicode(false);
+            });
+
+            modelBuilder.Entity<Login>(entity =>
+            {
+                entity.HasKey(e => e.GoogleId)
+                    .HasName("PK__login__0DA2E4838B0DA17E");
+
+                entity.Property(e => e.GoogleId).ValueGeneratedNever();
+
+                entity.Property(e => e.Efternavn).IsUnicode(false);
+
+                entity.Property(e => e.Fornavn).IsUnicode(false);
+
+                entity.Property(e => e.Room).IsUnicode(false);
+            });
+
+            modelBuilder.Entity<LoginRequest>(entity =>
+            {
+                entity.HasKey(e => e.GoogleId)
+                    .HasName("PK__loginReq__0DA2E483D3AD15F7");
+
+                entity.Property(e => e.GoogleId).ValueGeneratedNever();
+
+                entity.Property(e => e.Efternavn).IsUnicode(false);
+
+                entity.Property(e => e.Fornavn).IsUnicode(false);
+
+                entity.Property(e => e.Room).IsUnicode(false);
+            });
 
             modelBuilder.Entity<Timeslot>(entity =>
             {

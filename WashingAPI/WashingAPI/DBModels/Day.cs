@@ -19,8 +19,9 @@ namespace WashingAPI.DBModels
         [Key]
         [Column("id")]
         public int Id { get; set; }
-        [Column(TypeName = "date")]
-        public DateTime? ResDate { get; set; }
+        [Required]
+        [StringLength(255)]
+        public string ResDate { get; set; }
 
         [InverseProperty(nameof(Timeslot.Day))]
         public virtual ICollection<Timeslot> Timeslots { get; set; }
