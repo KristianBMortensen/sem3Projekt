@@ -3,6 +3,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using WashingAPI.DBModels;
 using WashingAPI.Managers;
 using WashingAPI.Models;
 
@@ -23,26 +24,26 @@ namespace WashingAPI.Controllers
 
         // GET: api/<LoginController>
         [HttpGet]
-        public Dictionary<string,string> Get()
+        public IEnumerable<Login> Get()
         {
             return _manager.GetAllTokens();
         }
 
         // GET api/<LoginController>/5
         [HttpGet("{id}")]
-        public ActionResult<string> Get(string id)
+        public ActionResult<int> Get(int id)
         {
-            string token = _manager.GetToken(id);
+            int token = _manager.GetToken(id);
             if (token == null)
                 return StatusCode(204);
             return Ok(token);
         }
 
         // POST api/<LoginController>
-        [HttpPost("{id}/opretToken")]
-        public bool Post(string id, string lejlighedNummer)
+        [HttpPost]
+        public bool Post(Login login)
         {
-            return _manager.CreateToken(id, lejlighedNummer);
+            return _manager.CreateToken(login);
         }
 
         // PUT api/<LoginController>/5

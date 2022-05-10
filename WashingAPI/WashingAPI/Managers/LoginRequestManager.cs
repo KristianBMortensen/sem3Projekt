@@ -2,62 +2,67 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using WashingAPI.DBModels;
 using WashingAPI.Models;
 
 namespace WashingAPI.Managers
 {
     public class LoginRequestManager
     {
-        private static Dictionary<string, LoginOprettelsesRequest> OprettelseRequests = new()
+        /*private static Dictionary<string, LoginOprettelsesRequest> OprettelseRequests = new()
         {
             {"23232323", new LoginOprettelsesRequest("Magnus", "Jensen", "28A")}
-        };
+        };*/
         private readonly LoginManager _manager;
+        private readonly Sem3Context _context;
 
         public LoginRequestManager()
         {
             _manager = new();
+            _context = new();
         }
-        public Dictionary<string, LoginOprettelsesRequest> GetAllRequests()
+        public IEnumerable<LoginRequest> GetAllRequests()
         {
-            return OprettelseRequests;
+            return _context.LoginRequests;
         }
 
-        public KeyValuePair<string, LoginOprettelsesRequest> GetRequest(string id)
+        public LoginRequest GetRequest(int id)
         {
 
-            foreach (KeyValuePair<string, LoginOprettelsesRequest> pair in OprettelseRequests)
+            foreach (LoginRequest pair in _context.LoginRequests)
             {
-                if (pair.Key == id)
+                if (pair.GoogleId == id)
                 {
-                    return new KeyValuePair<string, LoginOprettelsesRequest>(pair.Key, pair.Value);
-                    break;
+                    return pair;
                 }
             }
 
-            return new KeyValuePair<string, LoginOprettelsesRequest> (null, null);
+            return null;
 
         }
 
-        public bool CreateSignupRequest(string id, string fornavn, string efternavn, string lejlighedsnummer)
+        public bool CreateSignupRequest(LoginRequest login)
         {
-            OprettelseRequests.Add(id, new LoginOprettelsesRequest(fornavn, efternavn, lejlighedsnummer));
-                if (OprettelseRequests[id] != null)
-                    return true;
+            _context.LoginRequests.Add(login);
+            if (_context.LoginRequests.ToList().Find(l => l.GoogleId == login.GoogleId) != null)
+            {
+                _context.SaveChanges();
+                return true;
+            }
 
-                return false;
+            return false;
         }
 
-        public bool CreateLogin(string id, string room)
+        public bool CreateLogin(Login login)
         {
-            if (!_manager.CreateToken(id, room)) return false;
-            OprettelseRequests.Remove(id);
+            if (!_manager.CreateToken(login)) return false;
+            _context.LoginRequests.ToList().Remove(_context.LoginRequests.ToList().Find(l => l.GoogleId == login.GoogleId));
             return true;
         }
 
-        public bool DeleteRequest(string id)
+        public bool DeleteRequest(int id)
         {
-            OprettelseRequests.Remove(id);
+            _context.LoginRequests.ToList().Remove(_context.LoginRequests.ToList().Find(l => l.GoogleId == id));
             return true;
         }
     }
