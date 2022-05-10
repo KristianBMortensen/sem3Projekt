@@ -9,12 +9,13 @@ using Microsoft.EntityFrameworkCore;
 namespace WashingAPI.DBModels
 {
     [Table("loginRequest")]
-    [Index(nameof(GoogleId), Name = "UQ__loginReq__0DA2E4821B06B24E", IsUnique = true)]
+    [Index(nameof(GoogleId), Name = "UQ__loginReq__0DA2E4827C9B5337", IsUnique = true)]
     public partial class LoginRequest
     {
         [Key]
         [Column("googleId")]
-        public int GoogleId { get; set; }
+        [StringLength(255)]
+        public string GoogleId { get; set; }
         [Required]
         [Column("fornavn")]
         [StringLength(255)]

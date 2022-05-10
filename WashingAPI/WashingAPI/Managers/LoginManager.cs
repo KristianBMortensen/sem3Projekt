@@ -2,47 +2,58 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using WashingAPI.DBModels;
 using WashingAPI.Models;
 
 namespace WashingAPI.Managers
 {
     public class LoginManager
     {
-        private static Dictionary<string, string> Tokens = new()
+        /*private static Dictionary<string, string> Tokens = new()
         {
             { "102474468596296399731", "27A" }
-        };
+        };*/
+
+        private readonly Sem3Context _context;
 
         public LoginManager()
         {
-            
+            _context = new();
         }
 
-        public Dictionary<string,string> GetAllTokens()
+        public IEnumerable<Login> GetAllTokens()
         {
-            return Tokens;
+            return _context.Logins;
         }
 
         public string GetToken(string id)
         {
-            foreach (string token in Tokens.Keys)
+            foreach (Login token in _context.Logins)
             {
-                if (token == id)
-                    return token;
+                if (token.GoogleId == id)
+                    return token.GoogleId;
             }
 
             return null;
         }
 
-        public bool CreateToken(string id, string lejlighedsNummer)
+        public bool CreateToken(Login login)
         {
-            if (GetToken(id) == null)
+            if (GetToken(login.GoogleId) == null)
             {
-                Tokens.Add(id,lejlighedsNummer);
+                _context.Logins.Add(login);
+                _context.SaveChanges();
                 return true;
             }
 
             return false;
+        }
+
+        public bool DeleteLogin(string id)
+        {
+            _context.Logins.Remove(_context.Logins.Find(id));
+            _context.SaveChanges();
+            return true;
         }
     }
 }

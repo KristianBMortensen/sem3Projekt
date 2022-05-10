@@ -110,3 +110,58 @@ h5 {
     position: relative;
     overflow: hidden;
 }
+
+
+.kaldender-box {
+    background-color: #EFEFEF;
+    text-transform: none;
+    overflow: hidden;
+}
+
+.kalender-box-underbox {
+    padding:25px;
+}
+
+.kalender-undertitel{
+    text-align: left;
+    font-size: 24px;
+    font-weight: 600;
+    text-transform: none;
+}
+
+.vaskemaskine {
+    position: relative;
+    width: 200px;
+    height: 200px;
+}
+
+.maskine-1 {
+    background-color: #009BF0;
+}
+
+.maskine-2 {
+    background-color: #36CC25;
+}
+
+.vaskemaskine-status {
+    position: absolute;
+    top:50%;
+    left:50%;
+    transform: translate(-50%,-50%);
+    color: white;
+    font-weight: 600;
+}
+
+.vaskemanskine-tid-left {
+    text-align: left;
+    margin-left: 60px;
+}
+
+.vaskemanskine-tid-right {
+    text-align: left;
+    margin-left: 85px;
+}
+
+.kalender-table {
+    background-color: #00D4FF;
+}

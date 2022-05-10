@@ -3,6 +3,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using WashingAPI.DBModels;
 using WashingAPI.Managers;
 using WashingAPI.Models;
 
@@ -25,26 +26,26 @@ namespace WashingAPI.Controllers
         // GET: api/<LoginRequestController>
         [HttpGet]
 
-    public ActionResult<Dictionary<string, LoginOprettelsesRequest>> Get()
+    public ActionResult<IEnumerable<LoginRequest>> Get()
         {
-            Dictionary<string, LoginOprettelsesRequest> requests = _manager.GetAllRequests();
+            IEnumerable<LoginRequest> requests = _manager.GetAllRequests();
             if (requests == null) return StatusCode(404);
             return Ok(requests);
         }
 
         [HttpGet("{id}")]
-        public ActionResult<KeyValuePair<string, LoginOprettelsesRequest>> GetRequest(string id)
+        public ActionResult<LoginRequest> GetRequest(string id)
         {
-            KeyValuePair<string, LoginOprettelsesRequest> pair = new KeyValuePair<string, LoginOprettelsesRequest>(_manager.GetRequest(id).Key, _manager.GetRequest(id).Value);
-            if (pair.Key == null) return NotFound();
+            LoginRequest pair = _manager.GetRequest(id);
+            if (pair == null) return NotFound();
             return Ok(pair);
         }
 
         //Opretter request for at få et login for denne google konto og lejlighedsnummer
-        [HttpPost("{id}")]
-        public ActionResult<int> Post(string id, string fornavn, string efternavn, string lejlighedsnummer)
+        [HttpPost]
+        public ActionResult<bool> Post([FromBody] LoginRequest login)
         {
-            bool oprettet = _manager.CreateSignupRequest(id, fornavn, efternavn, lejlighedsnummer);
+            bool oprettet = _manager.CreateSignupRequest(login);
             if (!oprettet) return StatusCode(418);
             return Ok(oprettet);
         }
@@ -52,9 +53,9 @@ namespace WashingAPI.Controllers
         //Login anmodning accepteret
         //Opretter et login for denne google account
         [HttpPut("{id}")]
-        public ActionResult<bool> Put(string id, string room)
+        public ActionResult<bool> Put(string id)
         {
-            if (!_manager.CreateLogin(id, room)) return StatusCode(500);
+            if (!_manager.CreateLogin(id)) return StatusCode(500,"Kunne ikke oprette login");
             return Ok(true);
         }
 

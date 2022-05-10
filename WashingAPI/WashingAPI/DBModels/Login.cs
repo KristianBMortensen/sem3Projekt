@@ -9,16 +9,13 @@ using Microsoft.EntityFrameworkCore;
 namespace WashingAPI.DBModels
 {
     [Table("login")]
-    [Index(nameof(GoogleId), Name = "UQ__login__0DA2E482F904B9AF", IsUnique = true)]
+    [Index(nameof(GoogleId), Name = "UQ__login__0DA2E482E849BD18", IsUnique = true)]
     public partial class Login
     {
         [Key]
         [Column("googleId")]
-        public int GoogleId { get; set; }
-        [Required]
-        [Column("room")]
-        [StringLength(20)]
-        public string Room { get; set; }
+        [StringLength(255)]
+        public string GoogleId { get; set; }
         [Required]
         [Column("fornavn")]
         [StringLength(255)]
@@ -27,5 +24,9 @@ namespace WashingAPI.DBModels
         [Column("efternavn")]
         [StringLength(255)]
         public string Efternavn { get; set; }
+        [Required]
+        [Column("room")]
+        [StringLength(20)]
+        public string Room { get; set; }
     }
 }

@@ -3,6 +3,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using WashingAPI.DBModels;
 using WashingAPI.Managers;
 using WashingAPI.Models;
 
@@ -23,7 +24,7 @@ namespace WashingAPI.Controllers
 
         // GET: api/<LoginController>
         [HttpGet]
-        public Dictionary<string,string> Get()
+        public IEnumerable<Login> Get()
         {
             return _manager.GetAllTokens();
         }
@@ -39,10 +40,10 @@ namespace WashingAPI.Controllers
         }
 
         // POST api/<LoginController>
-        [HttpPost("{id}/opretToken")]
-        public bool Post(string id, string lejlighedNummer)
+        [HttpPost]
+        public bool Post(Login login)
         {
-            return _manager.CreateToken(id, lejlighedNummer);
+            return _manager.CreateToken(login);
         }
 
         // PUT api/<LoginController>/5
@@ -51,10 +52,13 @@ namespace WashingAPI.Controllers
         //{
         //}
 
-        //// DELETE api/<LoginController>/5
-        //[HttpDelete("{id}")]
-        //public void Delete(int id)
-        //{
-        //}
+        //DELETE api/<LoginController>/5
+        [HttpDelete("{id}")]
+        public ActionResult Delete(string id)
+        {
+            bool success = _manager.DeleteLogin(id);
+            if (!success) return StatusCode(500);
+            return Ok();
+        }
     }
 }

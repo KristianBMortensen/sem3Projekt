@@ -39,22 +39,19 @@ gapi.load('auth2', function(){
 Vue.createApp({
     data(){
         return {
-            googleId: null,
-            fornavn: null,
-            efternavn: null,
-            lejlighedsnummer: null,
+            loginRequest: {googleId: null, fornavn: null, efternavn: null, room: null},
             requestStatus: null
         }
     },
     methods: {
         async sendRequest(){
-            if(googleId.value != null && this.fornavn != null && this.efternavn != null && this.lejlighedsnummer != null){
-                const newUrl = url + googleId.value +"?fornavn="+this.fornavn+"&efternavn="+this.efternavn+"&lejlighedsnummer="+this.lejlighedsnummer
-                const response = await axios.post(newUrl)
+            if(googleId.value != null && this.loginRequest.fornavn != null && this.loginRequest.efternavn != null && this.loginRequest.room != null){
+                this.loginRequest.googleId = googleId.value
+                const response = await axios.post(url, this.loginRequest)
                 this.requestStatus = await response.status
             }else{
                 this.requestStatus = "Et felt mangler at blive udfyldt"
-                console.log("for: " + this.fornavn + " efter: " + this.efternavn + " id: " + googleId.value + " nummer: " + this.lejlighedsnummer)
+                console.log("for: " + this.loginRequest.fornavn + " efter: " + this.loginRequest.efternavn + " id: " + googleId.value + " nummer: " + this.loginRequest.room)
             }
         }
     }
