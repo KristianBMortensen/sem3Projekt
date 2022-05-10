@@ -14,6 +14,7 @@ Vue.createApp({
         },
         async remove(){
             if(this.requestId != null){
+                //console.log(this.requestId)
                 const response = await axios.delete(url + this.requestId)
                 this.loadAll()
                 this.closeModal()
@@ -21,7 +22,7 @@ Vue.createApp({
         },
 
         async accept(id,room){
-            if(id != null && room != null){
+            if((id != null && room != null) || (id != "" && room != "")){
                 const response = await axios.put(url + id+"?room="+room)
                 console.log("noget er null: id " + id + " room "+room)
                 this.loadAll()

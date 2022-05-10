@@ -34,7 +34,7 @@ namespace WashingAPI.Controllers
         }
 
         [HttpGet("{id}")]
-        public ActionResult<LoginRequest> GetRequest(int id)
+        public ActionResult<LoginRequest> GetRequest(string id)
         {
             LoginRequest pair = _manager.GetRequest(id);
             if (pair == null) return NotFound();
@@ -53,15 +53,15 @@ namespace WashingAPI.Controllers
         //Login anmodning accepteret
         //Opretter et login for denne google account
         [HttpPut("{id}")]
-        public ActionResult<bool> Put(Login login)
+        public ActionResult<bool> Put(string id)
         {
-            if (!_manager.CreateLogin(login)) return StatusCode(500);
+            if (!_manager.CreateLogin(id)) return StatusCode(500,"Kunne ikke oprette login");
             return Ok(true);
         }
 
         //Sletter login anmodning fra systemet
         [HttpDelete("{id}")]
-        public ActionResult<bool> Delete(int id)
+        public ActionResult<bool> Delete(string id)
         {
             if (!_manager.DeleteRequest(id)) return StatusCode(500);
             return Ok(true);

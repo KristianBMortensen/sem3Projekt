@@ -31,9 +31,9 @@ namespace WashingAPI.Controllers
 
         // GET api/<LoginController>/5
         [HttpGet("{id}")]
-        public ActionResult<int> Get(int id)
+        public ActionResult<string> Get(string id)
         {
-            int token = _manager.GetToken(id);
+            string token = _manager.GetToken(id);
             if (token == null)
                 return StatusCode(204);
             return Ok(token);
@@ -52,10 +52,13 @@ namespace WashingAPI.Controllers
         //{
         //}
 
-        //// DELETE api/<LoginController>/5
-        //[HttpDelete("{id}")]
-        //public void Delete(int id)
-        //{
-        //}
+        //DELETE api/<LoginController>/5
+        [HttpDelete("{id}")]
+        public ActionResult Delete(string id)
+        {
+            bool success = _manager.DeleteLogin(id);
+            if (!success) return StatusCode(500);
+            return Ok();
+        }
     }
 }

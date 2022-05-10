@@ -60,17 +60,17 @@
                     <form class="login-form">
                         <div class="login-input-control">
                             <label style="text-transform: none;">Fornavn</label>
-                            <input type="text" class="login-input" v-model="fornavn" />
+                            <input type="text" class="login-input" v-model="loginRequest.fornavn" />
                         </div>
 
                         <div class="login-input-control">
                             <label style="text-transform: none;">Efternavn</label>
-                            <input type="text" class="login-input" v-model="efternavn" />
+                            <input type="text" class="login-input" v-model="loginRequest.efternavn" />
                         </div>
 
                         <div class="login-input-control">
                             <label style="text-transform: none;">Lejlighedsnummer</label>
-                            <input type="email" class="login-input" v-model="lejlighedsnummer" />
+                            <input type="email" class="login-input" v-model="loginRequest.room" />
                         </div>
 
                         <input type="hidden" v-model="googleId" id="google-id">

@@ -26,7 +26,7 @@ namespace WashingAPI.Managers
             return _context.LoginRequests;
         }
 
-        public LoginRequest GetRequest(int id)
+        public LoginRequest GetRequest(string id)
         {
 
             foreach (LoginRequest pair in _context.LoginRequests)
@@ -44,25 +44,30 @@ namespace WashingAPI.Managers
         public bool CreateSignupRequest(LoginRequest login)
         {
             _context.LoginRequests.Add(login);
-            if (_context.LoginRequests.ToList().Find(l => l.GoogleId == login.GoogleId) != null)
-            {
-                _context.SaveChanges();
-                return true;
-            }
-
-            return false;
-        }
-
-        public bool CreateLogin(Login login)
-        {
-            if (!_manager.CreateToken(login)) return false;
-            _context.LoginRequests.ToList().Remove(_context.LoginRequests.ToList().Find(l => l.GoogleId == login.GoogleId));
+            _context.SaveChanges();
             return true;
         }
 
-        public bool DeleteRequest(int id)
+        public bool CreateLogin(string id)
         {
-            _context.LoginRequests.ToList().Remove(_context.LoginRequests.ToList().Find(l => l.GoogleId == id));
+            LoginRequest request = _context.LoginRequests.Find(id);
+            Login login = new Login()
+            {
+                GoogleId = request.GoogleId,
+                Fornavn = request.Fornavn,
+                Efternavn = request.Efternavn,
+                Room = request.Room
+            };
+            if (!_manager.CreateToken(login)) return false;
+            if (!DeleteRequest(id)) return false;
+            return true;
+        }
+
+        public bool DeleteRequest(string id)
+        {
+            _context.LoginRequests.Remove(_context.LoginRequests.ToList().Find(l => l.GoogleId == id));
+            _context.SaveChanges();
+            if (_context.LoginRequests.Find(id) != null) return false;
             return true;
         }
     }

@@ -29,7 +29,7 @@ namespace WashingAPI.DBModels
             if (!optionsBuilder.IsConfigured)
             {
 #warning To protect potentially sensitive information in your connection string, you should move it out of source code. You can avoid scaffolding the connection string by using the Name= syntax to read it from configuration - see https://go.microsoft.com/fwlink/?linkid=2131148. For more guidance on storing connection strings, see http://go.microsoft.com/fwlink/?LinkId=723263.
-                optionsBuilder.UseSqlServer("Data Source=3sem.database.windows.net;Initial Catalog=sem3;User ID=fhs15;Password=cake123!");
+                optionsBuilder.UseSqlServer("Data Source=3sem.database.windows.net;Initial Catalog=sem3;Persist Security Info=True;User ID=fhs15;Password=cake123!");
             }
         }
 
@@ -45,9 +45,9 @@ namespace WashingAPI.DBModels
             modelBuilder.Entity<Login>(entity =>
             {
                 entity.HasKey(e => e.GoogleId)
-                    .HasName("PK__login__0DA2E4838B0DA17E");
+                    .HasName("PK__login__0DA2E483C4AD5186");
 
-                entity.Property(e => e.GoogleId).ValueGeneratedNever();
+                entity.Property(e => e.GoogleId).IsUnicode(false);
 
                 entity.Property(e => e.Efternavn).IsUnicode(false);
 
@@ -59,9 +59,9 @@ namespace WashingAPI.DBModels
             modelBuilder.Entity<LoginRequest>(entity =>
             {
                 entity.HasKey(e => e.GoogleId)
-                    .HasName("PK__loginReq__0DA2E483D3AD15F7");
+                    .HasName("PK__loginReq__0DA2E483C0BA4853");
 
-                entity.Property(e => e.GoogleId).ValueGeneratedNever();
+                entity.Property(e => e.GoogleId).IsUnicode(false);
 
                 entity.Property(e => e.Efternavn).IsUnicode(false);
 

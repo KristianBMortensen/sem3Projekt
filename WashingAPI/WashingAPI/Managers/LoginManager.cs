@@ -26,7 +26,7 @@ namespace WashingAPI.Managers
             return _context.Logins;
         }
 
-        public int GetToken(int id)
+        public string GetToken(string id)
         {
             foreach (Login token in _context.Logins)
             {
@@ -34,7 +34,7 @@ namespace WashingAPI.Managers
                     return token.GoogleId;
             }
 
-            return -1;
+            return null;
         }
 
         public bool CreateToken(Login login)
@@ -42,10 +42,18 @@ namespace WashingAPI.Managers
             if (GetToken(login.GoogleId) == null)
             {
                 _context.Logins.Add(login);
+                _context.SaveChanges();
                 return true;
             }
 
             return false;
+        }
+
+        public bool DeleteLogin(string id)
+        {
+            _context.Logins.Remove(_context.Logins.Find(id));
+            _context.SaveChanges();
+            return true;
         }
     }
 }
