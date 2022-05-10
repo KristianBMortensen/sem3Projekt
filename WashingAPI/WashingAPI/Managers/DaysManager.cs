@@ -22,8 +22,9 @@ namespace WashingAPI.Managers
             return _context.Days.AsNoTracking().Include((d) => d.Timeslots).FirstOrDefault((d) => d.ResDate == Date);
         }
 
-        public void BookTime(int TimeslotID, string Room)
+        public void BookTime(int TimeslotID, string loginId)
         {
+            string Room = _context.Logins.Find(loginId).Room;
             _context.Timeslots.Find(TimeslotID).RoomNo = Room;
             _context.SaveChanges();
         }

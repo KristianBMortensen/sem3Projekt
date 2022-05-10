@@ -58,15 +58,15 @@
     
     <main class="container" id="app">
             <select class="form-select" aria-label="Default select example" v-model="date" @change="dateChange()">
-                <option v-for="day in days" :value="day">{{day.date}}</option>
+                <option v-for="day in days" :value="day">{{day.resDate}}</option>
             </select>
 
-            <select class="form-select" aria-label="Default select example" v-if="date" v-model="booking.time">
-                <template v-for="(value, key) in date.timeslots">
-                    <option :value="key" v-if="value == null">{{key}}</option>
+            <select class="form-select" aria-label="Default select example" v-if="date" v-model="timeId">
+                <template v-for="value in date.timeslots">
+                    <option :value="value.id" v-if="value.roomNo == null">{{value.resTime}}</option>
                 </template>
             </select>
-            <input class="form-control" v-model="booking.room">
+            <select class="form-select" aria-label="Default select example" v-else></select>
             <button class="btn btn-primary" @click="createBooking()">Book nu</button>
             <span>{{bookingStatus}}</span>
     </main>

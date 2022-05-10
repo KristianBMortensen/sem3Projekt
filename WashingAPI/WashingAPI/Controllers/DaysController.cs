@@ -37,9 +37,9 @@ namespace WashingAPI.Controllers
         }
 
         [HttpPost("{TimeslotID}/book")]
-        public void BookTime(int TimeslotID, string room)
+        public void BookTime(int TimeslotID, string loginId)
         {
-            manager.BookTime(TimeslotID, room);
+            manager.BookTime(TimeslotID, loginId);
         }
     }
 }
