@@ -90,7 +90,7 @@
                                             <tr>
                                                 <template v-for="(value, name) in days[0].timeslots">
                                                     <th v-if="name" >
-                                                        {{name}}
+                                                        {{value.resTime}}
                                                     </th>
                                                 </template>
                                             </tr>
@@ -99,7 +99,7 @@
                                             <tr>
                                                 <template v-for="(value, name) in days[0].timeslots">
                                                     <td v-if="value">
-                                                        {{value}}
+                                                        {{value.roomNo}}
                                                     </td>
                                                     <td v-else>
                                                         Fri
@@ -109,7 +109,7 @@
                                             <tr>
                                                 <template v-for="(value, name) in days[0].timeslots">
                                                     <td v-if="value">
-                                                        {{value}}
+                                                        {{value.roomNo}}
                                                     </td>
                                                     <td v-else>
                                                         Fri
