@@ -26,7 +26,7 @@ namespace WashingAPI.Managers
             return _context.LoginRequests;
         }
 
-        public LoginRequest GetRequest(string id)
+        public LoginRequest? GetRequest(string id)
         {
 
             foreach (LoginRequest pair in _context.LoginRequests)

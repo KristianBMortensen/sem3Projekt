@@ -26,7 +26,7 @@ namespace WashingAPI.Managers
             return _context.Logins;
         }
 
-        public string GetToken(string id)
+        public string? GetToken(string id)
         {
             foreach (Login token in _context.Logins)
             {
