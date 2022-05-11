@@ -51,15 +51,22 @@ namespace WashingAPI.Managers
         public bool CreateLogin(string id)
         {
             LoginRequest request = _context.LoginRequests.Find(id);
-            Login login = new Login()
+            if(request != null)
             {
-                GoogleId = request.GoogleId,
-                Fornavn = request.Fornavn,
-                Efternavn = request.Efternavn,
-                Room = request.Room
-            };
-            if (!_manager.CreateToken(login)) return false;
-            if (!DeleteRequest(id)) return false;
+                Login login = new Login()
+                {
+                    GoogleId = request.GoogleId,
+                    Fornavn = request.Fornavn,
+                    Efternavn = request.Efternavn,
+                    Room = request.Room
+                };
+                if (!_manager.CreateToken(login)) return false;
+                if (!DeleteRequest(id)) return false;
+            }
+            else
+            {
+                return false;
+            }
             return true;
         }
 

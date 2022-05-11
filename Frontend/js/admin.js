@@ -11,6 +11,7 @@ Vue.createApp({
         async loadAll(){
             const response = await axios.get(url)
             this.requests = await response.data
+            console.log(this.requests)
         },
         async remove(){
             if(this.requestId != null){
@@ -20,10 +21,11 @@ Vue.createApp({
             }
         },
 
-        async accept(id,room){
-            if((id != null && room != null) || (id != "" && room != "")){
-                const response = await axios.put(url + id+"?room="+room)
-                console.log("noget er null: id " + id + " room "+room)
+        async accept(id){
+            if(id != null && id != ""){
+
+                const response = await axios.put(url + id)
+                console.log("noget er null: id " + id)
                 this.loadAll()
             }else{
                 console.log("noget er null: id " + id + " room "+room)
