@@ -19,7 +19,13 @@ namespace WashingAPI.Managers
 
         public Day? GetDay(string Date)
         {
-            return _context.Days.AsNoTracking().Include((d) => d.Timeslots).FirstOrDefault((d) => d.ResDate == Date);
+            var day = _context.Days.AsNoTracking().Include((d) => d.Timeslots).FirstOrDefault((d) => d.ResDate == Date);
+            if (day == null)
+            {
+                AddDay(Date);
+                day = _context.Days.AsNoTracking().Include((d) => d.Timeslots).FirstOrDefault((d) => d.ResDate == Date);
+            }
+            return day;
         }
 
         public void BookTime(int TimeslotID, string loginId)
@@ -32,7 +38,7 @@ namespace WashingAPI.Managers
         public void AddDay(string date)
         {
             _context.ChangeTracker.Clear();
-            DBModels.Day day = new() { ResDate = date};
+            Day day = new() { ResDate = date};
             _context.Days.Add(day);
             _context.SaveChanges();
             FillTimeslots(date);

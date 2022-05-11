@@ -19,7 +19,7 @@ namespace UDP_proxy
                     {
                         byte[] recived = UDPClient.Receive(ref iPEndPoint);
                         Console.WriteLine("Recived something");
-                        Httpclient.PostAsync("", null);
+                        Httpclient.PostAsync("https://localhost:44323/api/GreenDays", null);
                     }
                 }
             }
