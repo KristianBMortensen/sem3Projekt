@@ -7,7 +7,7 @@ function checkCookie(){
     if(sPath != "/login/"){
         
         if(getCookie() == ""){
-            window.location.href = "/access_denied/fail.html"
+            window.location.href = "/login/"
         }            
     }
 }

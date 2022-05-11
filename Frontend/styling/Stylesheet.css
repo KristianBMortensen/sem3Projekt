@@ -1,3 +1,8 @@
+:root {
+    --leidg-maskine: #36CC25;
+    --optaget-maskine: #009BF0;
+}
+
 *{
     margin: 0px;
     padding: 0px;
@@ -122,6 +127,11 @@ h5 {
     padding:25px;
 }
 
+.vaskemaskine-wrapper {
+    position: relative;
+    height: 225px;
+}
+
 .kalender-undertitel{
     text-align: left;
     font-size: 24px;
@@ -130,38 +140,40 @@ h5 {
 }
 
 .vaskemaskine {
-    position: relative;
+    position: absolute;
+    top: 0;
+    left: 50%;
+    transform: translateX(-50%);
     width: 200px;
     height: 200px;
 }
 
-.maskine-1 {
-    background-color: #009BF0;
-}
-
-.maskine-2 {
-    background-color: #36CC25;
+.maskine {
+    background-color: var(--leidg-maskine);
+    position: relative;
 }
 
 .vaskemaskine-status {
     position: absolute;
-    top:50%;
-    left:50%;
+    top: 50%;
+    left: 50%;
     transform: translate(-50%,-50%);
     color: white;
     font-weight: 600;
 }
 
-.vaskemanskine-tid-left {
-    text-align: left;
-    margin-left: 60px;
-}
-
-.vaskemanskine-tid-right {
-    text-align: left;
-    margin-left: 85px;
+.vaskemanskine-tid {
+    text-align: center;
 }
 
 .kalender-table {
     background-color: #00D4FF;
+}
+
+.kalender-table tbody td:not(:last-child){
+    border-right: 1px solid black;
+}
+
+.kalender-table thead th:not(:last-child){
+    border-right: 1px solid black;
 }
