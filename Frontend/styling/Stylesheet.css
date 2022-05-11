@@ -1,5 +1,5 @@
 :root {
-    --leidg-maskine: #36CC25;
+    --ledig-maskine: #36CC25;
     --optaget-maskine: #009BF0;
 }
 
@@ -149,7 +149,7 @@ h5 {
 }
 
 .maskine {
-    background-color: var(--leidg-maskine);
+    background-color: var(--ledig-maskine);
     position: relative;
 }
 
@@ -176,4 +176,21 @@ h5 {
 
 .kalender-table thead th:not(:last-child){
     border-right: 1px solid black;
+}
+
+
+.green-day-box {
+    background-color: var(--ledig-maskine);
+    height: 82px;
+    width: calc(100% + 70px);
+    position: relative;
+}
+
+.green-day-box p {
+    position: absolute;
+    top: 50%;
+    left:50%;
+    transform: translate(-50%,-50%);
+    color: white;
+    font-weight: 600;
 }
