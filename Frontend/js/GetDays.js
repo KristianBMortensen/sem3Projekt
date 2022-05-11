@@ -67,9 +67,9 @@ Vue.createApp({
 
         updateMaskine(){
             for(let i = 0; i < this.today.timeslots.length; i++){
-                if(this.checkTime(this.today.timeslots[i].resTime)){
+                if(this.checkTime(this.today.timeslots[i].resTime) && this.today.timeslots[i].roomNo){
                     this.$refs.vaskemaskine.style.backgroundColor = "var(--optaget-maskine)"
-                    this.$refs.maskineStatus.innerHTML = "12:00-13:30"
+                    this.$refs.maskineStatus.innerHTML = this.today.timeslots[i].resTime
                     this.maskineStatus = "Igang"
                     console.log("fisk")
                     return
@@ -83,11 +83,12 @@ Vue.createApp({
         async greenDayHandler(){
             const greenUrl = "https://localhost:44323/api/GreenDays"
             const response = await axios.get(greenUrl)
-            const isGreen = await response.data
+            const data = await response.data
+            const isGreen = await data.key
 
             if(isGreen){
                 this.$refs.vaskemaskine.style.backgroundColor = "var(--optaget-maskine)"
-                this.$refs.maskineStatus.innerHTML = "12:00-13:30"
+                this.$refs.maskineStatus.innerHTML = data.value
                 this.maskineStatus = "Igang"
             }else{
                 this.$refs.vaskemaskine.style.backgroundColor = "var(--ledig-maskine)"
