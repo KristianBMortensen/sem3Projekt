@@ -1,0 +1,54 @@
+:root{
+    --box-background: #A3AF9E;
+}
+
+.min-vask-box {
+    background-color: #EFEFEF;
+    padding:25px;
+}
+
+.current-vaske-box {
+    background-color: var(--box-background);
+    width: 100%;
+    height: 210px;
+    margin-bottom: 35px;
+}
+
+.future-vaske-box {
+    background-color: var(--box-background);
+    width: 100%;
+    height: 360px;
+}
+
+.vask-box-item {
+    position: relative;
+    width: 100%;
+    height: 75px;
+    background-color: #C4C4C4;
+}
+
+.vask-box-item-time{
+    text-align: left;
+    font-size: 20px;
+    text-transform: none;
+    position: absolute;
+    top: 50%;
+    left: 20px;
+    transform: translateY(-50%);
+}
+
+.vask-box-item-status {
+    position: absolute;
+    top:50%;
+    right:20px;
+    transform: translateY(-50%);
+    background-color: #36CC25;
+    padding:10px;
+}
+
+.vask-box-item-status p{
+    padding: 0;
+    margin: 0;
+    font-weight: 600;
+    color: white;
+}

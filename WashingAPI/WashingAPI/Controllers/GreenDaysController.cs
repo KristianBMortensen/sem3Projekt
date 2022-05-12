@@ -22,7 +22,7 @@ namespace WashingAPI.Controllers
 
         // GET: api/<GreenDaysController>
         [HttpGet]
-        public bool Get()
+        public KeyValuePair<bool, string> Get()
         {
             return _manager.GetAction();
         }

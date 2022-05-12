@@ -31,7 +31,7 @@
                     <a href="/booking/">OVERSIGT</a>
                 </li>
                 <li>
-                    <a href="/Minside.html">MIN SIDE</a>
+                    <a href="/min-side/">MIN SIDE</a>
                 </li>
                 <li>
                     <a href="/login/logud.html">LOGUD</a>
@@ -65,10 +65,10 @@
                                     <h3 class="kalender-undertitel">Status:</h3>
                                 </div>
                                 <div class="col-9 vaskemaskine-wrapper">
-                                    <div class="vaskemaskine maskine">
-                                        <p class="vaskemaskine-status">Ledig</p>
+                                    <div class="vaskemaskine maskine" ref="vaskemaskine">
+                                        <p class="vaskemaskine-status">{{maskineStatus}}</p>
                                     </div>
-                                    <p class="vaskemanskine-tid">00:00</p>
+                                    <p class="vaskemanskine-tid" ref="maskineStatus">00:00</p>
                                 </div>
                             </div>
                         </div>
@@ -79,10 +79,10 @@
                                     <h3 class="kalender-undertitel">Dagens tider:</h3>
                                 </div>
                                 <div class="col-8">
-                                    <table class="table kalender-table" v-if="days">
+                                    <table class="table kalender-table" v-if="today && !today.greenDay">
                                         <thead>
                                             <tr>
-                                                <template v-for="(value, name) in days[0].timeslots">
+                                                <template v-for="value in today.timeslots">
                                                     <th>
                                                         {{value.resTime}}
                                                     </th>
@@ -91,8 +91,8 @@
                                         </thead>
                                         <tbody>
                                             <tr>
-                                                <template v-for="(value, name) in days[0].timeslots">
-                                                    <td v-if="value">
+                                                <template v-for="value in today.timeslots">
+                                                    <td v-if="value.roomNo">
                                                         {{value.roomNo}}
                                                     </td>
                                                     <td v-else>
@@ -102,6 +102,9 @@
                                             </tr>
                                         </tbody>
                                     </table>
+                                    <div v-else class="table green-day-box">
+                                        <p>Ingen booking i dag. Tjek status for maksinen</p>
+                                    </div>
                                 </div>
                             </div>
                         </div>
