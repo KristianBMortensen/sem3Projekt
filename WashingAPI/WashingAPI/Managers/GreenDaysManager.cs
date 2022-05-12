@@ -17,7 +17,7 @@ namespace WashingAPI.Managers
             if (duration.Seconds > 30)
             {
                 start = false;
-                return new KeyValuePair<bool, string>(false, startTime.ToString("h:m:s"));
+                return new KeyValuePair<bool, string>(false, startTime.ToString("HH:mm:ss"));
             }
             else
             {                
