@@ -4,6 +4,7 @@ Vue.createApp({
     data(){
         return {
             today: null,
+            roomNo: null,
             maskineStatus: "Ledig",
         }
     },
@@ -30,6 +31,15 @@ Vue.createApp({
             catch(e){
                 console.log(e.message)
             }
+        },
+
+        async getARoom(){
+            const url = "https://localhost:44323/api/Login/"
+            const id = this.getCookie()
+            const newUrl = url + id + "/full"
+            const response = await axios.get(newUrl)
+            const data = await response.data
+            
         },
 
         checkDate(){
@@ -95,6 +105,22 @@ Vue.createApp({
                 this.$refs.maskineStatus.innerHTML = ""
                 this.maskineStatus = "Ledig"
             }
+        },
+
+        getCookie(){
+            let name = "vasklet=";
+            let decodedCookie = decodeURIComponent(document.cookie);
+            let ca = decodedCookie.split(';');
+            for(let i = 0; i < ca.length; i++) {
+                let c = ca[i];
+                while (c.charAt(0) == ' ') {
+                c = c.substring(1);
+                }
+                if (c.indexOf(name) == 0) {
+                    return c.substring(name.length, c.length);
+                }
+            }
+            return "";
         }
     }
 }).mount("#app")
