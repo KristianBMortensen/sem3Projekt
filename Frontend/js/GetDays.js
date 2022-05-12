@@ -19,6 +19,7 @@ Vue.createApp({
                 console.log(newUrl)
                 const response = await axios.get(URL+"/"+this.checkDate())
                 this.today = await response.data
+                console.log(this.today)
                 if(!this.today.greenDay){
                     await this.updateMaskine()
                 }
@@ -43,7 +44,7 @@ Vue.createApp({
             if(day < 10){
                 day = "0"+day
             }
-            todayDate = day+"-"+month+"-"+year
+            todayDate = "11-"+month+"-"+year
             console.log(todayDate)
 
             return todayDate
@@ -70,8 +71,7 @@ Vue.createApp({
                 if(this.checkTime(this.today.timeslots[i].resTime) && this.today.timeslots[i].roomNo){
                     this.$refs.vaskemaskine.style.backgroundColor = "var(--optaget-maskine)"
                     this.$refs.maskineStatus.innerHTML = this.today.timeslots[i].resTime
-                    this.maskineStatus = "Igang"
-                    console.log("fisk")
+                    this.maskineStatus = "Igang" 
                     return
                 }
             }
