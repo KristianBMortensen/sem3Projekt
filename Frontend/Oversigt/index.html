@@ -39,7 +39,7 @@
                 <a href="/login/logud.html">LOGUD</a>
             </li>
             <li>
-                <a href="/Kontakt.html">KONTAKT</a>
+                <a href="/kontakt/">KONTAKT</a>
             </li>
             <template v-if="adminAllowed">
                 <li>
@@ -56,30 +56,38 @@
 
     </nav>
     
-    <main class="container" id="app">
-            <select class="form-select" aria-label="Default select example" v-model="date" @change="dateChange()">
-                <option v-for="day in days" :value="day">{{day.resDate}}</option>
-            </select>
-
-            <select class="form-select" aria-label="Default select example" v-if="date" v-model="timeId">
-                <template v-for="value in date.timeslots">
-                    <option :value="value.id" v-if="value.roomNo == null">{{value.resTime}}</option>
-                </template>
-            </select>
-            <select class="form-select" aria-label="Default select example" v-else></select>
-            <button class="btn btn-primary" @click="createBooking()">Book nu</button>
-            <span>{{bookingStatus}}</span>
+    <main class="container-fluid" id="app">
+        <div class="row">
+            <div v-for="day in days" class="col-xl-2 col-4" style="padding: 1em;">
+                <table v-if="!day.greenDay" class="table kalender-table" style="height: 100%;">
+                    <thead>
+                        <th>Tid</th>
+                        <th>{{day.resDate}}</th>
+                    </thead>
+                    <tbody>
+                        <tr v-for="time in day.timeslots">
+                            <td>{{time.resTime}}</td>
+                            <td v-if="time.roomNo">{{time.roomNo}}</td>
+                            <td v-else>Fri</td>
+                        </tr>
+                    </tbody>
+                </table>
+                <div v-else class="green-day-box" style="height: 100%;">
+                    <h3 style="color: white;">{{day.resDate}}</h3>
+                    <p>Grøn dag</p>
+                </div>
+            </div>
+        </div>  
     </main>
     
+    <script src="/js/checkLogedin.js"></script>
+    <script src="/js/Oversigt.js"></script>
+
     <footer>
         <div class="footer-content">
             <p>
                 Ved problemer kontakt viceværten på telefon xx xx xx xx eller på email: xxxx@xxxxx.dk
             </p>
-
         </div>
-
     </footer>
-    <script src="/js/checkLogedin.js"></script>
-    <script src="/js/booking.js"></script>
 </body>

@@ -13,18 +13,21 @@ namespace WashingAPI.Managers
 
         public KeyValuePair<bool, string> GetAction()
         {
-            TimeSpan duration = DateTime.Now - lastAction;
+            TimeSpan duration = DateTime.UtcNow - lastAction;
             if (duration.Seconds > 30)
             {
                 start = false;
-                return new KeyValuePair<bool, string>(false, startTime.ToString("h:m:s"));
+                return new KeyValuePair<bool, string>(false, startTime.ToString("HH:mm:ss"));
             }
             else
             {                
                 if (!start)
-                    startTime = DateTime.Now;
+                    startTime = DateTime.UtcNow;
                 start = true;
-                return new KeyValuePair<bool, string>(true, startTime.ToString("HH:mm:ss"));
+                DateTime future = startTime;
+                future = future.AddMinutes(90);
+                TimeSpan timeLeft = future - DateTime.UtcNow;
+                return new KeyValuePair<bool, string>(true, timeLeft.Hours+":"+timeLeft.Minutes+":"+timeLeft.Seconds);
             }
         }
 

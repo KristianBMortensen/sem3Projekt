@@ -4,7 +4,10 @@ Vue.createApp({
     data(){
         return {
             today: null,
+            roomNo: null,
             maskineStatus: "Ledig",
+            greenDayTimeLeft: null,
+            myRoom: null,
         }
     },
 
@@ -16,9 +19,9 @@ Vue.createApp({
         async Getall(){
             try{
                 const newUrl = URL+"/"+this.checkDate()
-                console.log(newUrl)
-                const response = await axios.get(URL+"/"+this.checkDate())
+                const response = await axios.get(newUrl)
                 this.today = await response.data
+                console.log(this.today)
                 if(!this.today.greenDay){
                     await this.updateMaskine()
                 }
@@ -29,6 +32,17 @@ Vue.createApp({
             catch(e){
                 console.log(e.message)
             }
+
+            this.getARoom()
+        },
+
+        async getARoom(){
+            const url = "https://localhost:44323/api/Login/"
+            const id = this.getCookie()
+            const newUrl = url + id + "/full"
+            const response = await axios.get(newUrl)
+            const data = await response.data
+            this.myRoom = await data.room
         },
 
         checkDate(){
@@ -43,7 +57,7 @@ Vue.createApp({
             if(day < 10){
                 day = "0"+day
             }
-            todayDate = day+"-"+month+"-"+year
+            todayDate = "13-"+month+"-"+year
             console.log(todayDate)
 
             return todayDate
@@ -70,8 +84,7 @@ Vue.createApp({
                 if(this.checkTime(this.today.timeslots[i].resTime) && this.today.timeslots[i].roomNo){
                     this.$refs.vaskemaskine.style.backgroundColor = "var(--optaget-maskine)"
                     this.$refs.maskineStatus.innerHTML = this.today.timeslots[i].resTime
-                    this.maskineStatus = "Igang"
-                    console.log("fisk")
+                    this.maskineStatus = "Igang" 
                     return
                 }
             }
@@ -88,13 +101,55 @@ Vue.createApp({
 
             if(isGreen){
                 this.$refs.vaskemaskine.style.backgroundColor = "var(--optaget-maskine)"
-                this.$refs.maskineStatus.innerHTML = data.value
+                this.greenDayTimeLeft = data.value
                 this.maskineStatus = "Igang"
             }else{
                 this.$refs.vaskemaskine.style.backgroundColor = "var(--ledig-maskine)"
-                this.$refs.maskineStatus.innerHTML = ""
+                this.greenDayTimeLeft = null
                 this.maskineStatus = "Ledig"
             }
+            let timearray = this.greenDayTimeLeft.split(":")
+            timearray[0] = parseInt(timearray[0])
+            timearray[1] = parseInt(timearray[1])
+            timearray[2] = parseInt(timearray[2])
+
+            const maskineStatus = this.$refs.maskineStatus
+            setInterval(function(){
+                timearray[2]--
+                
+                if(timearray[2] < 0){
+                    timearray[1]--
+                    timearray[2] = 59
+                }
+
+                if(timearray[1] < 0){
+                    timearray[0]--
+                    timearray[1] = 59
+                }
+
+                if(timearray[0] <= 0){
+                    timearray[0] = 0
+                }
+
+                maskineStatus.innerHTML = (timearray[0] < 10 ? "0"+timearray[0] : timearray[0])+":"+(timearray[1] < 10 ? "0"+timearray[1] : timearray[1])+":"+(timearray[2] < 10 ? "0"+timearray[2] : timearray[2])
+
+            },1000)
+        },
+
+        getCookie(){
+            let name = "vasklet=";
+            let decodedCookie = decodeURIComponent(document.cookie);
+            let ca = decodedCookie.split(';');
+            for(let i = 0; i < ca.length; i++) {
+                let c = ca[i];
+                while (c.charAt(0) == ' ') {
+                c = c.substring(1);
+                }
+                if (c.indexOf(name) == 0) {
+                    return c.substring(name.length, c.length);
+                }
+            }
+            return "";
         }
     }
 }).mount("#app")

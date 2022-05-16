@@ -1,6 +1,7 @@
 :root {
     --ledig-maskine: #36CC25;
     --optaget-maskine: #009BF0;
+    --min-vaske-tid: #7bf8ff;
 }
 
 *{
@@ -182,7 +183,7 @@ h5 {
 .green-day-box {
     background-color: var(--ledig-maskine);
     height: 82px;
-    width: calc(100% + 70px);
+    width: 100%;
     position: relative;
 }
 
@@ -193,4 +194,8 @@ h5 {
     transform: translate(-50%,-50%);
     color: white;
     font-weight: 600;
+}
+
+main{
+    padding-bottom: 2em;
 }

@@ -34,8 +34,16 @@ namespace WashingAPI.Controllers
         {
             string token = _manager.GetToken(id);
             if (token == null)
-                return StatusCode(204);
+                return StatusCode(404);
             return Ok(token);
+        }
+
+        [HttpGet("{id}/full")]
+        public ActionResult<Login> GetLogin(string id)
+        {
+            Login login = _manager.GetLogin(id);
+            if (login == null) return StatusCode(404);
+            return Ok(login);
         }
 
         // POST api/<LoginController>
