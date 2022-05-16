@@ -183,7 +183,7 @@ h5 {
 .green-day-box {
     background-color: var(--ledig-maskine);
     height: 82px;
-    width: calc(100% + 70px);
+    width: 100%;
     position: relative;
 }
 
