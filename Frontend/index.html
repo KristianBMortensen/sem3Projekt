@@ -92,7 +92,7 @@
                                         <tbody>
                                             <tr>
                                                 <template v-for="value in today.timeslots">
-                                                    <td v-if="value.roomNo && value.roomNo != myRoom && myRoom" style="background-color: #A3AF9E"></td>
+                                                    <td v-if="value.roomNo && value.roomNo != myRoom && myRoom" style="background-color: var(--optaget-vaske-tid)"></td>
                                                     <td v-else-if="value.roomNo && value.roomNo == myRoom && myRoom" style="background-color: var(--min-vaske-tid)">MIN</td>
                                                     <td v-else>
                                                         Fri
