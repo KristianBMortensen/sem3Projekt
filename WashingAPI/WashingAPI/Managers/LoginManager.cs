@@ -37,6 +37,17 @@ namespace WashingAPI.Managers
             return null;
         }
 
+        public Login GetLogin(string id)
+        {
+            foreach (Login token in _context.Logins)
+            {
+                if (token.GoogleId == id)
+                    return token;
+            }
+
+            return null;
+        }
+
         public bool CreateToken(Login login)
         {
             if (GetToken(login.GoogleId) == null)

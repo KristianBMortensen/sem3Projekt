@@ -8,7 +8,7 @@ namespace WashingAPI.Managers
     public class GreenDaysManager
     {
         private static DateTime lastAction = DateTime.Parse("1 Jan 1970 00:00:00");
-        private static bool start = false;
+        private static bool start = true;
         private static DateTime startTime = DateTime.Parse("1 Jan 1970 00:00:00");
 
         public KeyValuePair<bool, string> GetAction()

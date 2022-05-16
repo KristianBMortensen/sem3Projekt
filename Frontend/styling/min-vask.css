@@ -5,6 +5,7 @@
 .min-vask-box {
     background-color: #EFEFEF;
     padding:25px;
+    margin-bottom: 100px;
 }
 
 .current-vaske-box {
@@ -42,7 +43,6 @@
     top:50%;
     right:20px;
     transform: translateY(-50%);
-    background-color: #36CC25;
     padding:10px;
 }
 
@@ -50,5 +50,5 @@
     padding: 0;
     margin: 0;
     font-weight: 600;
-    color: white;
+    color: black;
 }

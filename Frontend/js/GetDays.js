@@ -4,6 +4,7 @@ Vue.createApp({
     data(){
         return {
             today: null,
+            roomNo: null,
             maskineStatus: "Ledig",
         }
     },
@@ -19,6 +20,7 @@ Vue.createApp({
                 console.log(newUrl)
                 const response = await axios.get(URL+"/"+this.checkDate())
                 this.today = await response.data
+                console.log(this.today)
                 if(!this.today.greenDay){
                     await this.updateMaskine()
                 }
@@ -29,6 +31,15 @@ Vue.createApp({
             catch(e){
                 console.log(e.message)
             }
+        },
+
+        async getARoom(){
+            const url = "https://localhost:44323/api/Login/"
+            const id = this.getCookie()
+            const newUrl = url + id + "/full"
+            const response = await axios.get(newUrl)
+            const data = await response.data
+            
         },
 
         checkDate(){
@@ -43,7 +54,7 @@ Vue.createApp({
             if(day < 10){
                 day = "0"+day
             }
-            todayDate = day+"-"+month+"-"+year
+            todayDate = "11-"+month+"-"+year
             console.log(todayDate)
 
             return todayDate
@@ -70,8 +81,7 @@ Vue.createApp({
                 if(this.checkTime(this.today.timeslots[i].resTime) && this.today.timeslots[i].roomNo){
                     this.$refs.vaskemaskine.style.backgroundColor = "var(--optaget-maskine)"
                     this.$refs.maskineStatus.innerHTML = this.today.timeslots[i].resTime
-                    this.maskineStatus = "Igang"
-                    console.log("fisk")
+                    this.maskineStatus = "Igang" 
                     return
                 }
             }
@@ -95,6 +105,22 @@ Vue.createApp({
                 this.$refs.maskineStatus.innerHTML = ""
                 this.maskineStatus = "Ledig"
             }
+        },
+
+        getCookie(){
+            let name = "vasklet=";
+            let decodedCookie = decodeURIComponent(document.cookie);
+            let ca = decodedCookie.split(';');
+            for(let i = 0; i < ca.length; i++) {
+                let c = ca[i];
+                while (c.charAt(0) == ' ') {
+                c = c.substring(1);
+                }
+                if (c.indexOf(name) == 0) {
+                    return c.substring(name.length, c.length);
+                }
+            }
+            return "";
         }
     }
 }).mount("#app")
