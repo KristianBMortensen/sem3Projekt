@@ -8,12 +8,12 @@ namespace WashingAPI.Managers
     public class GreenDaysManager
     {
         private static DateTime lastAction = DateTime.Parse("1 Jan 1970 00:00:00");
-        private static bool start = true;
+        private static bool start = false;
         private static DateTime startTime = DateTime.Parse("1 Jan 1970 00:00:00");
 
         public KeyValuePair<bool, string> GetAction()
         {
-            TimeSpan duration = DateTime.Now - lastAction;
+            TimeSpan duration = DateTime.UtcNow - lastAction;
             if (duration.Seconds > 30)
             {
                 start = false;
@@ -22,9 +22,12 @@ namespace WashingAPI.Managers
             else
             {                
                 if (!start)
-                    startTime = DateTime.Now;
+                    startTime = DateTime.UtcNow;
                 start = true;
-                return new KeyValuePair<bool, string>(true, startTime.ToString("HH:mm:ss"));
+                DateTime future = startTime;
+                future = future.AddMinutes(90);
+                TimeSpan timeLeft = future - DateTime.UtcNow;
+                return new KeyValuePair<bool, string>(true, timeLeft.Hours+":"+timeLeft.Minutes+":"+timeLeft.Seconds);
             }
         }
 
