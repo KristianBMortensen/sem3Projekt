@@ -30,7 +30,10 @@ namespace WashingAPI.Managers
             var day = _context.Days.AsNoTracking().Include((d) => d.Timeslots).FirstOrDefault((d) => d.ResDate == Date);
             if (day == null)
             {
-                AddDay(Date);
+                DateTime dt = DateTime.Parse(Date);
+                // Checks if the day is a green day
+                bool isGreenday = dt.DayOfWeek == DayOfWeek.Sunday || dt.DayOfWeek == DayOfWeek.Wednesday;
+                AddDay(Date, isGreenday);
                 day = _context.Days.AsNoTracking().Include((d) => d.Timeslots).FirstOrDefault((d) => d.ResDate == Date);
             }
             return day;
@@ -43,20 +46,24 @@ namespace WashingAPI.Managers
             _context.SaveChanges();
         }
 
-        public void AddDay(string date)
+        public void AddDay(string date, bool greenDay = false)
         {
             _context.ChangeTracker.Clear();
-            Day day = new() { ResDate = date};
+            Day day = new() { ResDate = date, GreenDay = greenDay};
             _context.Days.Add(day);
             _context.SaveChanges();
-            FillTimeslots(date);
+            if (!greenDay)
+            {
+                FillTimeslots(date);
+            }
+            
         }
 
-        public List<Day> GetWeekDay()
+        public List<Day> GetWeekDay(int numdays)
         {
             List<Day> dayList = new List<Day>();
             DateTime today = DateTime.Now.AddDays(-1);
-            for (var i = 0; i < 6; i++)
+            for (var i = 0; i < numdays; i++)
             {
                 today = today.AddDays(1);
                 string todayS = today.ToString("dd:MM:yyyy");

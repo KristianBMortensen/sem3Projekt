@@ -41,10 +41,10 @@ namespace WashingAPI.Controllers
         {
             manager.BookTime(TimeslotID, loginId);
         }
-        [HttpGet("/week")]
-        public IEnumerable<Day> WeekDays()
+        [HttpGet("week")]
+        public IEnumerable<Day> WeekDays(int numdays = 7)
         {
-            return manager.GetWeekDay();
+            return manager.GetWeekDay(numdays);
         }
     }
 }
