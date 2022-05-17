@@ -5,6 +5,7 @@ using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 using Microsoft.EntityFrameworkCore;
+using System.Text.Json.Serialization;
 
 namespace WashingAPI.DBModels
 {
@@ -18,10 +19,12 @@ namespace WashingAPI.DBModels
         public string ResTime { get; set; }
         [StringLength(255)]
         public string RoomNo { get; set; }
+        [JsonIgnore]
         public int DayId { get; set; }
 
         [ForeignKey(nameof(DayId))]
         [InverseProperty("Timeslots")]
+        [JsonIgnore]
         public virtual Day Day { get; set; }
     }
 }

@@ -39,6 +39,7 @@ function signOut() {
     });
     document.cookie = "vasklet=;path=/;expires=Thu, 01 Jan 1970 00:00:01 GMT;"
     document.getElementById('login-btn-text').innerText = "SIGN IN WITH GOOGLE"
+    document.getElementById("loginStatus").innerHTML = "Kunne ikke logge ind. Har du en bruger?"
 }
 
 gapi.load('auth2', function(){
