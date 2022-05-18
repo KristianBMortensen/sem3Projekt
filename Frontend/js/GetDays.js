@@ -150,6 +150,14 @@ Vue.createApp({
                 }
             }
             return "";
-        }
+        },
+        async BookTime(timeslotid){
+            const loginId = this.getCookie()
+            const newUrl = url+timeslotid+"/book?loginId="+loginId
+            console.log(newUrl)
+            const response = await axios.post(newUrl)
+            await response.data
+            this.Getall()
+        },
     }
 }).mount("#app")
