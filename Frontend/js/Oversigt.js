@@ -5,14 +5,20 @@ Vue.createApp({
         return {
             days: [],
             loginid: null,
+            times: null
         }
     }, 
     methods: {
         async Getweekdays(){
-            const newUrl = url2+"week?numdays=8"
+            const newUrl = url2+"week?numDays=8"
             console.log(newUrl)
             const response = await axios.get(newUrl)
             this.days = await response.data
+            if(this.days[0].timeslots.length > 0)
+                this.times = this.days[0].timeslots
+            else
+                this.times = this.days[1].timeslots
+            
             console.log(this.days)
         },
 

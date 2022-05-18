@@ -57,7 +57,7 @@ Vue.createApp({
             if(day < 10){
                 day = "0"+day
             }
-            todayDate = day+"-"+month+"-"+year
+            todayDate = "19-"+month+"-"+year
             console.log(todayDate)
 
             return todayDate

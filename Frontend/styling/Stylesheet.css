@@ -1,7 +1,7 @@
 :root {
     --ledig-maskine: #36CC25;
     --optaget-maskine: #009BF0;
-    --min-vaske-tid: #7bf8ff;
+    --min-vaske-tid: #06dae5;
     --optaget-vaske-tid: #A3AF9E;
 }
 
@@ -169,20 +169,22 @@ h5 {
 }
 
 .kalender-table {
-    background-color: #00D4FF;
+    background-color: #298293;
+    color:white;
 }
 
 .kalender-table tbody td:not(:last-child){
-    border-right: 1px solid black;
+
+    padding: 8px 16px;
 }
 
 .kalender-table thead th:not(:last-child){
-    border-right: 1px solid black;
+
 }
 
 
 .green-day-box {
-    background-color: var(--ledig-maskine);
+    background-color: #198754;
     height: 82px;
     width: 100%;
     position: relative;

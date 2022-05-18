@@ -68,11 +68,11 @@ namespace WashingAPI.Managers
         {
             List<Day> dayList = new List<Day>();
             // we remove 1 day from the datetime so that the first run of the loop returns today
-            DateTime today = DateTime.Now.AddDays(-1);
+            DateTime today = DateTime.Now.AddDays(0);
             for (var i = 0; i < numdays; i++)
             {
                 today = today.AddDays(1);
-                string todayS = today.ToString("dd:MM:yyyy");
+                string todayS = today.ToString("dd-MM-yyyy");
                 //changes the format from DD.MM.YYYY to DD-MM-YYYY that is our chosen date format
                 todayS = todayS.Replace(".", "-");
                 // we use Getday so that if the day does not exist it will be added
