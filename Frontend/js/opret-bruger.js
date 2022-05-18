@@ -21,11 +21,12 @@ function init() {
 
 
 function getGoogleId(googleUser){
+    let googleBtn = document.getElementById('google-login-btn')
     var auth2 = gapi.auth2.getAuthInstance();
     var profile = auth2.currentUser.get().getBasicProfile();
     console.log(profile.getId())
     googleId.value = profile.getId()
-    googleStatus.innerText = "google id modtaget"
+    googleBtn.innerText = "google id modtaget"
     console.log(googleId.value)
 }
 
@@ -45,12 +46,15 @@ Vue.createApp({
     },
     methods: {
         async sendRequest(){
-            if(googleId.value != null && this.loginRequest.fornavn != null && this.loginRequest.efternavn != null && this.loginRequest.room != null){
+            if(googleId.value != "" && this.loginRequest.fornavn != null && this.loginRequest.efternavn != null && this.loginRequest.room != null){
+                //console.log("for: " + this.loginRequest.fornavn + " efter: " + this.loginRequest.efternavn + " id: " + googleId.value + " nummer: " + this.loginRequest.room)
                 this.loginRequest.googleId = googleId.value
+                console.log(this.loginRequest)
                 const response = await axios.post(url, this.loginRequest)
+                console.log(response.data)
                 
-                if(await response.data == "200")
-                    this.requestStatus = "Success"
+                if(response.data == true)
+                    window.location.href = "success.html"
                 else
                     this.requestStatus = "Noget gik galt. Prøv igen senere"
             }else{
