@@ -81,6 +81,13 @@ namespace WashingAPI.Managers
             return dayList;
         }
 
+        public void DeleteBooking(int TimeslotId)
+        {
+            Timeslot timeslot = _context.Timeslots.Find(TimeslotId);
+            timeslot.RoomNo = null;
+            _context.SaveChanges();
+        }
+
         private void FillTimeslots(string date)
         {
             // gets the dayId for timeslots
