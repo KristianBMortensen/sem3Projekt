@@ -3,7 +3,6 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using WashingAPI.DBModels;
-using WashingAPI.Models;
 
 namespace WashingAPI.Managers
 {
@@ -72,6 +71,7 @@ namespace WashingAPI.Managers
 
         public bool DeleteRequest(string id)
         {
+            //why the tolist() .find() should work directly on it and be better
             _context.LoginRequests.Remove(_context.LoginRequests.ToList().Find(l => l.GoogleId == id));
             _context.SaveChanges();
             if (_context.LoginRequests.Find(id) != null) return false;

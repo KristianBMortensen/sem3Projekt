@@ -17,9 +17,9 @@ namespace WashingAPI.Controllers
         private readonly DaysManager manager = new();
         // GET: api/<ValuesController>
         [HttpGet]
-        public IEnumerable<Day> Get()
+        public IEnumerable<Day> Getdays([FromQuery]string room)
         {
-            return manager.GetAllDays();
+            return manager.GetAllDays(room);
         }
 
         // GET api/<ValuesController>/5
@@ -40,6 +40,11 @@ namespace WashingAPI.Controllers
         public void BookTime(int TimeslotID, string loginId)
         {
             manager.BookTime(TimeslotID, loginId);
+        }
+        [HttpGet("week")]
+        public IEnumerable<Day> WeekDays(int numdays = 7)
+        {
+            return manager.GetWeekDay(numdays);
         }
     }
 }

@@ -1,3 +1,5 @@
+const url = "https://localhost:44323/api/Login/"
+
 window.onload = function(){
     checkCookie()
 }
@@ -36,9 +38,18 @@ Vue.createApp({
         }
     },
     async created(){
-        if(getCookie() != "")
+        const loginId = getCookie()
+        if(loginId != "")
         {
-            this.adminAllowed = true
+            const response = await axios.get(url+loginId+"/full")
+            const data = await response.data
+            if(data.rolle == "admin")
+            {
+                this.adminAllowed = true
+            }else{
+                this.adminAllowed = false
+            }
+            console.log(data)
         }else{
             console.log("admin not allowed")
         }

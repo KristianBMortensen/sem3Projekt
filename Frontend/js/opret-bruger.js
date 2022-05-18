@@ -48,7 +48,11 @@ Vue.createApp({
             if(googleId.value != null && this.loginRequest.fornavn != null && this.loginRequest.efternavn != null && this.loginRequest.room != null){
                 this.loginRequest.googleId = googleId.value
                 const response = await axios.post(url, this.loginRequest)
-                this.requestStatus = await response.status
+                
+                if(await response.data == "200")
+                    this.requestStatus = "Success"
+                else
+                    this.requestStatus = "Noget gik galt. Prøv igen senere"
             }else{
                 this.requestStatus = "Et felt mangler at blive udfyldt"
                 console.log("for: " + this.loginRequest.fornavn + " efter: " + this.loginRequest.efternavn + " id: " + googleId.value + " nummer: " + this.loginRequest.room)
