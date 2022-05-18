@@ -1,4 +1,4 @@
-const url = "https://localhost:44323/api/Days/"
+const url2 = "https://localhost:44323/api/Days/"
 
 Vue.createApp({
     data(){
@@ -9,7 +9,7 @@ Vue.createApp({
     }, 
     methods: {
         async Getweekdays(){
-            const newUrl = url+"week?numdays=8"
+            const newUrl = url2+"week?numdays=8"
             console.log(newUrl)
             const response = await axios.get(newUrl)
             this.days = await response.data
@@ -17,7 +17,7 @@ Vue.createApp({
         },
 
         async BookTime(timeslotid){
-            const newUrl = url+timeslotid+"/book?loginid="+this.loginid
+            const newUrl = url2+timeslotid+"/book?loginid="+this.loginid
             console.log(newUrl)
             const response = await axios.post(newUrl, null)
             await response.data
