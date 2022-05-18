@@ -68,7 +68,7 @@ namespace WashingAPI.Managers
         {
             List<Day> dayList = new List<Day>();
             // we remove 1 day from the datetime so that the first run of the loop returns today
-            DateTime today = DateTime.Now.AddDays(0);
+            DateTime today = DateTime.Now.AddDays(-1);
             for (var i = 0; i < numdays; i++)
             {
                 today = today.AddDays(1);
