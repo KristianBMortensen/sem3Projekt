@@ -29,13 +29,6 @@ namespace WashingAPI.Controllers
             return manager.GetDay(date);
         }
 
-        // POST api/<ValuesController>
-        [HttpPost]
-        public void Post([FromBody] string date)
-        {
-            manager.AddDay(date);
-        }
-
         [HttpPost("{TimeslotID}/book")]
         public void BookTime(int TimeslotID, string loginId)
         {
@@ -45,6 +38,12 @@ namespace WashingAPI.Controllers
         public IEnumerable<Day> WeekDays(int numdays = 7)
         {
             return manager.GetWeekDay(numdays);
+        }
+
+        [HttpDelete("{TimeslotID}/book")]
+        public void DeleteBooking(int TimeslotID)
+        {
+            manager.DeleteBooking(TimeslotID);
         }
     }
 }
