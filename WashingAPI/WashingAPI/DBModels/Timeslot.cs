@@ -19,12 +19,12 @@ namespace WashingAPI.DBModels
         public string ResTime { get; set; }
         [StringLength(255)]
         public string RoomNo { get; set; }
-        [JsonIgnore]
+        [JsonIgnore] // since timeslots are only called together with days this is useless data
         public int DayId { get; set; }
 
         [ForeignKey(nameof(DayId))]
         [InverseProperty("Timeslots")]
-        [JsonIgnore]
+        [JsonIgnore] // Else json will try to reference day and start running in circles
         public virtual Day Day { get; set; }
     }
 }
