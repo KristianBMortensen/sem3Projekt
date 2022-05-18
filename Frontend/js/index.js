@@ -55,15 +55,20 @@ function setCookie(id){
 
 async function checkGoogleID(id){
     const newUrl = url+id
-    const response = await axios.get(newUrl)
-    const data = await response.data
-
-    if(data == id)
-    {
-        setCookie(id)
-        console.log("loged in successfully")
-        document.location.href = "/"
-    }else{
+    try{
+        const response = await axios.get(newUrl)
+        const data = await response.data
+    
+        if(data == id)
+        {
+            setCookie(id)
+            console.log("loged in successfully")
+            document.location.href = "/"
+        }else{
+            console.log("no user was found!")
+            signOut()
+        }
+    }catch(e){
         console.log("no user was found!")
         signOut()
     }

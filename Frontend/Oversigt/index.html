@@ -13,7 +13,7 @@
 
 
 <head>
-    <title>Booking</title>
+    <title>Oversigt</title>
 
 
 </head>
@@ -30,7 +30,7 @@
                 <a href="/">HOME</a>
             </li>
             <li>
-                <a href="/booking/">OVERSIGT</a>
+                <a href="/Oversigt/">OVERSIGT</a>
             </li>
             <li>
                 <a href="/min-side/">MIN SIDE</a>
@@ -53,7 +53,7 @@
             <div class="line2"></div>
             <div class="line3"></div>
         </div>
-
+        <div id="navigation"></div>
     </nav>
     
     <main class="container-fluid" id="app">
@@ -61,14 +61,14 @@
             <div v-for="day in days" class="col-xl-2 col-4" style="padding: 1em;">
                 <table v-if="!day.greenDay" class="table kalender-table" style="height: 100%;">
                     <thead>
-                        <th>Tid</th>
-                        <th>{{day.resDate}}</th>
+                        <!-- <th>Tid</th> -->
+                        <th colspan="2">{{day.resDate}}</th>
                     </thead>
                     <tbody>
                         <tr v-for="time in day.timeslots">
                             <td>{{time.resTime}}</td>
                             <td v-if="time.roomNo">{{time.roomNo}}</td>
-                            <td v-else>Fri</td>
+                            <td v-else><button @click="BookTime(time.id)" class="btn btn-success">Book</button></td>
                         </tr>
                     </tbody>
                 </table>
