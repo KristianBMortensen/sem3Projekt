@@ -72,7 +72,7 @@ namespace WashingAPI.Managers
             for (var i = 0; i < numdays; i++)
             {
                 today = today.AddDays(1);
-                string todayS = today.ToString("dd:MM:yyyy");
+                string todayS = today.ToString("dd-MM-yyyy");
                 //changes the format from DD.MM.YYYY to DD-MM-YYYY that is our chosen date format
                 todayS = todayS.Replace(".", "-");
                 // we use Getday so that if the day does not exist it will be added
@@ -83,8 +83,7 @@ namespace WashingAPI.Managers
 
         public void DeleteBooking(int TimeslotId)
         {
-            Timeslot timeslot = _context.Timeslots.Find(TimeslotId);
-            timeslot.RoomNo = null;
+            _context.Timeslots.Find(TimeslotId).RoomNo = null;
             _context.SaveChanges();
         }
 

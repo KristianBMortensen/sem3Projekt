@@ -9,6 +9,7 @@
         integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
         <link rel="stylesheet" href="/styling/Stylesheet.css">
         <link rel="stylesheet" href="/styling/general.css">
+        <link rel="stylesheet" href="/styling/oversigt.css">
         <meta name="google-signin-client_id" content="842417189442-1vfdnhn31bm7poc2ba3sf5qvhj3dguvj.apps.googleusercontent.com">
         <script src="https://apis.google.com/js/platform.js?onload=init" async defer></script>
         <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
@@ -92,10 +93,10 @@
                                         <tbody>
                                             <tr>
                                                 <template v-for="value in today.timeslots">
-                                                    <td v-if="value.roomNo && value.roomNo != myRoom && myRoom" style="background-color: var(--optaget-vaske-tid)"></td>
-                                                    <td v-else-if="value.roomNo && value.roomNo == myRoom && myRoom" style="background-color: var(--min-vaske-tid)">MIN</td>
+                                                    <td v-if="value.roomNo && value.roomNo != myRoom && myRoom" style="background-color: var(--optaget-vaske-tid); vertical-align: middle">OPTAGET</td>
+                                                    <td v-else-if="value.roomNo && value.roomNo == myRoom && myRoom" style="background-color: var(--min-vaske-tid); vertical-align: middle;">MIN TID</td>
                                                     <td v-else>
-                                                        Fri
+                                                        <button @click="BookTime(value.id)" class="booking-btn">Book</button>
                                                     </td>
                                                 </template>
                                             </tr>

@@ -5,7 +5,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using WashingAPI.Models;
+using WashingAPI.DBModels;
 
 namespace WashingAPI.Managers.Tests
 {
@@ -23,23 +23,25 @@ namespace WashingAPI.Managers.Tests
         [TestMethod()]
         public void GetAllDaysTest()
         {
-            List<Day> days = _daysManager.GetAllDays();
-            Assert.AreEqual("04-05-2022", days[0].Date);
+            List<Day> days = _daysManager.GetAllDays("");
+            Assert.AreEqual("19-05-2022", days[0].ResDate);
         }
 
         [TestMethod()]
         public void GetDayTest()
         {
-            var day = _daysManager.GetDay("04-05-2022");
-            Assert.AreEqual("04-05-2022", day.Date);
+            var day = _daysManager.GetDay("19-05-2022");
+            Assert.AreEqual("19-05-2022", day.ResDate);
         }
 
         [TestMethod()]
         public void BookTimeTest()
         {
-            _daysManager.BookTime("04-05-2022", "7:30-9:00", "14");
-            var day = _daysManager.GetDay("04-05-2022");
-            Assert.AreEqual("14", day.Timeslots["7:30-9:00"]);
+            _daysManager.BookTime(560, "102474468596296399731");
+            var day = _daysManager.GetDay("19-05-2022");
+            Assert.AreEqual("28A", day.Timeslots.Where(d => d.Id == 560).FirstOrDefault().RoomNo);
+            _daysManager.DeleteBooking(560);
+            Assert.AreEqual(null, _daysManager.GetDay("19-05-2022").Timeslots.Where(d => d.Id == 560).FirstOrDefault().RoomNo);
         }
     }
 }

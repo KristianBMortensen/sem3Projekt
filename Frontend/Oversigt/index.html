@@ -9,6 +9,7 @@
 <script src="https://unpkg.com/vue@next"></script>
 <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
 <link rel="stylesheet" href="/styling/Stylesheet.css">
+<link rel="stylesheet" href="/styling/oversigt.css">
 <html>
 
 
@@ -53,7 +54,6 @@
             <div class="line2"></div>
             <div class="line3"></div>
         </div>
-        <div id="navigation"></div>
     </nav>
     
     <main class="container-fluid" id="app">
@@ -66,15 +66,15 @@
                     </thead>
                     <tbody>
                         <tr v-for="time in day.timeslots">
-                            <td>{{time.resTime}}</td>
-                            <td v-if="time.roomNo">{{time.roomNo}}</td>
-                            <td v-else><button @click="BookTime(time.id)" class="btn btn-success">Book</button></td>
+                            <td style="vertical-align: middle">{{time.resTime}}</td>
+                            <td v-if="time.roomNo"><button class="btn" style="color:white; font-weight: 600; pointer-events: none;">{{time.roomNo}}</button></td>
+                            <td v-else><button @click="BookTime(time.id)" class="booking-btn">Book</button></td>
                         </tr>
                     </tbody>
                 </table>
                 <div v-else class="green-day-box" style="height: 100%;">
                     <h3 style="color: white;">{{day.resDate}}</h3>
-                    <p>Grøn dag</p>
+                    <p>Fri dag</p>
                 </div>
             </div>
         </div>  

@@ -9,6 +9,7 @@ namespace WashingAPI.Managers
     {
         private static DateTime lastAction = DateTime.Parse("1 Jan 1970 00:00:00");
         private static bool start = false;
+        private static bool actuallyRuns = false;
         private static DateTime startTime = DateTime.Parse("1 Jan 1970 00:00:00");
 
         public KeyValuePair<bool, string> GetAction()
@@ -17,23 +18,29 @@ namespace WashingAPI.Managers
             if (duration.Seconds > 30)
             {
                 start = false;
+                actuallyRuns = false;
                 return new KeyValuePair<bool, string>(false, startTime.ToString("HH:mm:ss"));
             }
             else
-            {                
-                if (!start)
-                    startTime = DateTime.UtcNow;
-                start = true;
-                DateTime future = startTime;
-                future = future.AddMinutes(90);
-                TimeSpan timeLeft = future - DateTime.UtcNow;
-                return new KeyValuePair<bool, string>(true, timeLeft.Hours+":"+timeLeft.Minutes+":"+timeLeft.Seconds);
+            {
+                if (actuallyRuns)
+                {
+                    if (!start)
+                        startTime = DateTime.UtcNow;
+                    start = true;
+                    DateTime future = startTime;
+                    future = future.AddMinutes(90);
+                    TimeSpan timeLeft = future - DateTime.UtcNow;
+                    return new KeyValuePair<bool, string>(true, timeLeft.Hours + ":" + timeLeft.Minutes + ":" + timeLeft.Seconds);
+                }
             }
+            return new KeyValuePair<bool, string>(false, startTime.ToString("HH:mm:ss"));
         }
 
         public void UpdateLastAction()
         {
             lastAction = DateTime.Now;
+            actuallyRuns = true;
         }
     }
 }
