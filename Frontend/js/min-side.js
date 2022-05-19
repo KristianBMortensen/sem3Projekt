@@ -6,33 +6,33 @@ Vue.createApp({
         return{
             today: null,
             futureDays: null,
-            myLogin: null
+            myLogin: null,
+            vaskeTidTilSletningId: null
         }
     },methods:{
         async getAll(){      
             const loginId = this.getCookie()      
-            const loginResponse = await axios.get(loginUrl+loginId)
+            const loginResponse = await axios.get(loginUrl+loginId+"/full")
             this.myLogin = await loginResponse.data
 
-            const date = this.getDate(1)
+            const date = this.getDate(0)
             const dateUrl = (daysURL+date)
-            console.log(date)
             const response = await axios.get(dateUrl)
             const result = await response.data
             
             this.today = result
 
-            const futureResponse = await axios.get(daysURL+this.myLogin.room)
+            const futureResponse = await axios.get(daysURL+"?room="+this.myLogin.room)
             const futureData = await futureResponse.data
 
             let futureDaysArray = []
 
-            futureData.foreach(item => {
-                if(this.checkStringDate(item.resDate)){
-                    futureDaysArray.push(item)
+           for(let i = 0; i < futureData.length; i++){
+                if(this.checkStringDate(futureData[i].resDate)){
+                    futureDaysArray.push(futureData[i])
                 }
-            })
-            console.table(futureDaysArray)
+            }
+            this.futureDays = futureDaysArray
         },
 
         getDate(future){
@@ -53,7 +53,6 @@ Vue.createApp({
             }
             
             todayDate = day+"-"+month+"-"+year
-            console.log(todayDate)
 
             return todayDate
         },
@@ -61,7 +60,7 @@ Vue.createApp({
         checkStringDate(date){
             let day = date.split('-')[0]
             let month = date.split('-')[1]
-            let year = date.spliut('')[2]
+            let year = date.split('')[2]
 
             day = parseInt(day)
             month = parseInt(month)
@@ -80,6 +79,31 @@ Vue.createApp({
             
             return true
         },
+        getTime(){
+            const date = new Date()
+            const hour = date.getUTCHours()+2
+            const minutes = date.getUTCMinutes()
+
+            return hour+":"+minutes
+        },
+
+        checkTime(times){
+            const timeArray = times.split("-")
+            const time = this.getTime()
+
+            let newTimeArray = time.split(':')
+
+            for(let i = 0; i < timeArray.length; i++){
+                let newDataTimeArray = timeArray[i].split(':')
+                if(parseInt(newTimeArray[0]) >= parseInt(newDataTimeArray[0]) && parseInt(newTimeArray[1]) >= parseInt(newDataTimeArray[1])){
+                    console.log(newDataTimeArray[0]+":"+newDataTimeArray[1]+" | "+time)
+                }else{
+                    return true
+                }
+            }
+
+            return false
+        },
         getCookie(){
             let name = "vasklet=";
             let decodedCookie = decodeURIComponent(document.cookie);
@@ -94,6 +118,21 @@ Vue.createApp({
                 }
             }
             return "";
+        },
+
+        showModel(id){
+            this.$refs.adminModal.style.display = "block"
+            this.vaskeTidTilSletningId = id
+        },
+
+        closeModal(){
+            this.$refs.adminModal.style.display = "none"
+        },
+
+        async removeVasketid(){
+            const response = await axios.delete(daysURL+this.vaskeTidTilSletningId+"/book")
+            this.getAll()
+            this.closeModal()
         }
     },
     created(){
