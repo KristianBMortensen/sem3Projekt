@@ -49,7 +49,6 @@ Vue.createApp({
             }else{
                 this.adminAllowed = false
             }
-            console.log(data)
         }else{
             console.log("admin not allowed")
         }
