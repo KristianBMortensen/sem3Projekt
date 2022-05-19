@@ -26,7 +26,7 @@ namespace SeliniumTest
         [ClassCleanup]
         public static void Cleanup()
         {
-            //driver.Dispose();
+            driver.Dispose();
         }
 
         [TestMethod]
