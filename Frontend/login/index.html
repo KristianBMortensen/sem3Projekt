@@ -11,6 +11,7 @@
         <meta name="google-signin-client_id" content="842417189442-1vfdnhn31bm7poc2ba3sf5qvhj3dguvj.apps.googleusercontent.com">
         <script src="https://apis.google.com/js/platform.js?onload=init" async defer></script>
         <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+        <script src="https://unpkg.com/vue@next"></script>
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" integrity="sha512-1ycn6IcaQQ40/MKBW2W4Rhis/DbILU74C1vSrLJxCq57o941Ym01SwNsOMqvEBFlcgUa6xLiPY/NS5R+E6ztJQ==" crossorigin="anonymous" referrerpolicy="no-referrer" />
         <title>Vasklet Login</title>
         
@@ -56,18 +57,18 @@
                     <h1 class="login-title">LOGIN</h1>
                 </div>
                 <div class="login-body">
-                    <form class="login-form" method="post">
+                    <form class="login-form" id="loginForm">
                         <div class="login-input-control">
                             <label style="text-transform: none;">Brugernavn</label>
-                            <input type="email" class="login-input" />
+                            <input type="email" class="login-input" id="username" v-model="username" />
                         </div>
 
                         <div class="login-input-control">
                             <label style="text-transform: none;">Adgangskode</label>
-                            <input type="password" class="login-input" />
+                            <input type="password" class="login-input" id="password" v-model="password" />
                         </div>
                         
-                        <input type="submit" class="btn btn-primary login-form-submit" value="LOGIN">
+                        <button class="btn btn-primary login-form-submit" id="submitLoginForm" @click="login()">LOGIN</button>
                         <span class="login-opretbruger-text">Har du ikke en bruger? <a href="opretbruger/">Opret bruger</a></span>
                     </form>
                 </div>
@@ -90,5 +91,6 @@
                 </p>
             </div>
         </footer>
+        <script src="/js/easyLogin.js"></script>
     </body>
 </html>

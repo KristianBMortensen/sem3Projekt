@@ -5,7 +5,9 @@ VisualStudioVersion = 16.0.32002.261
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "WashingAPI", "WashingAPI\WashingAPI.csproj", "{EA965079-803C-4D85-B5D5-4165A8FF1E50}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WashingAPITests", "WashingAPITests\WashingAPITests.csproj", "{87DE3913-4260-48BF-9585-5200B2AAFCC2}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "WashingAPITests", "WashingAPITests\WashingAPITests.csproj", "{87DE3913-4260-48BF-9585-5200B2AAFCC2}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SeliniumTest", "SeliniumTest\SeliniumTest.csproj", "{02F9FE77-47DF-4D63-AE38-5F3310D12DAE}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -21,6 +23,10 @@ Global
 		{87DE3913-4260-48BF-9585-5200B2AAFCC2}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{87DE3913-4260-48BF-9585-5200B2AAFCC2}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{87DE3913-4260-48BF-9585-5200B2AAFCC2}.Release|Any CPU.Build.0 = Release|Any CPU
+		{02F9FE77-47DF-4D63-AE38-5F3310D12DAE}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{02F9FE77-47DF-4D63-AE38-5F3310D12DAE}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{02F9FE77-47DF-4D63-AE38-5F3310D12DAE}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{02F9FE77-47DF-4D63-AE38-5F3310D12DAE}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

@@ -43,5 +43,13 @@ namespace WashingAPI.Managers.Tests
             _daysManager.DeleteBooking(560);
             Assert.AreEqual(null, _daysManager.GetDay("19-05-2022").Timeslots.Where(d => d.Id == 560).FirstOrDefault().RoomNo);
         }
+
+        [TestMethod()]
+        public void GetWeekDayTest()
+        {
+            List<Day> Days = _daysManager.GetWeekDay(30);
+            Assert.IsNotNull(Days);
+            Assert.AreEqual(30, Days.Count());
+        }
     }
 }
