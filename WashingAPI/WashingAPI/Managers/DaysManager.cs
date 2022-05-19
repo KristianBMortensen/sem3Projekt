@@ -83,8 +83,7 @@ namespace WashingAPI.Managers
 
         public void DeleteBooking(int TimeslotId)
         {
-            Timeslot timeslot = _context.Timeslots.Find(TimeslotId);
-            timeslot.RoomNo = null;
+            _context.Timeslots.Find(TimeslotId).RoomNo = null;
             _context.SaveChanges();
         }
 
