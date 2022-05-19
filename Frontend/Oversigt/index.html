@@ -68,7 +68,7 @@
                     <tbody>
                         <tr v-for="time in day.timeslots">
                             <td style="vertical-align: middle">{{time.resTime}}</td>
-                            <td v-if="time.roomNo"><button class="btn" style="color:white; font-weight: 600;" disabled>{{time.roomNo}}</button></td>
+                            <td v-if="time.roomNo"><button class="btn" style="color:white; font-weight: 600; pointer-events: none;">{{time.roomNo}}</button></td>
                             <td v-else><button @click="BookTime(time.id)" class="booking-btn">Book</button></td>
                         </tr>
                     </tbody>
