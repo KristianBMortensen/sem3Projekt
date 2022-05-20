@@ -2,6 +2,7 @@
 using System.Net.Http;
 using System.Net;
 using System.Net.Sockets;
+using System.Text;
 
 namespace UDP_proxy
 {
@@ -13,13 +14,20 @@ namespace UDP_proxy
             {
                 using (var UDPClient = new UdpClient())
                 {
-                    UDPClient.Client.Bind(new IPEndPoint(IPAddress.Any, 5005));
+                    UDPClient.Client.Bind(new IPEndPoint(IPAddress.Any, 6969));
                     IPEndPoint iPEndPoint = null;
+                    int i = 1;
+                    Encoding utf8 = Encoding.UTF8;
                     while (true)
                     {
+
                         byte[] recived = UDPClient.Receive(ref iPEndPoint);
-                        Console.WriteLine("Recived something");
-                        Httpclient.PostAsync("https://localhost:44323/api/GreenDays", null);
+                        int data = int.Parse(Encoding.UTF8.GetString(recived));
+
+                        Console.WriteLine(i + ". " + data);
+                        i++;
+                        if (data > 0)
+                            Httpclient.PostAsync("https://localhost:44323/api/GreenDays", null);
                     }
                 }
             }
