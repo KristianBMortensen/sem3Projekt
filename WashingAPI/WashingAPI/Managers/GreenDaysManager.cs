@@ -19,7 +19,7 @@ namespace WashingAPI.Managers
             {
                 start = false;
                 actuallyRuns = false;
-                return new KeyValuePair<bool, string>(false, startTime.ToString("HH:mm:ss"));
+                return new KeyValuePair<bool, string>(false, startTime.ToString("HH:mm:ss").Replace(".", ":"));
             }
             else
             {
@@ -34,7 +34,7 @@ namespace WashingAPI.Managers
                     return new KeyValuePair<bool, string>(true, timeLeft.Hours + ":" + timeLeft.Minutes + ":" + timeLeft.Seconds);
                 }
             }
-            return new KeyValuePair<bool, string>(false, startTime.ToString("HH:mm:ss"));
+            return new KeyValuePair<bool, string>(false, startTime.ToString("HH:mm:ss").Replace(".", ":"));
         }
 
         public void UpdateLastAction()

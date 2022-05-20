@@ -31,7 +31,7 @@ namespace WashingAPI.Managers.Tests
         [TestMethod()]
         public void GetRequestTest()
         {
-            string id = "34834956549t033243";
+            string id = "106264481957335070957";
             LoginRequest request = _manager.GetRequest(id);
             Assert.IsNotNull(request);
             Assert.AreEqual(id, request.GoogleId);
