@@ -7,10 +7,10 @@ namespace WashingAPI.Managers
 {
     public class GreenDaysManager
     {
-        private static DateTime lastAction = DateTime.Parse("1 Jan 1970 00:00:00");
-        private static bool start = false;
-        private static bool actuallyRuns = false;
-        private static DateTime startTime = DateTime.Parse("1 Jan 1970 00:00:00");
+        public static DateTime lastAction = DateTime.Parse("1 Jan 1970 00:00:00");
+        public static bool start = false;
+        public static bool actuallyRuns = false;
+        public static DateTime startTime = DateTime.Parse("1 Jan 1970 00:00:00");
 
         public KeyValuePair<bool, string> GetAction()
         {
@@ -19,7 +19,7 @@ namespace WashingAPI.Managers
             {
                 start = false;
                 actuallyRuns = false;
-                return new KeyValuePair<bool, string>(false, startTime.ToString("HH:mm:ss"));
+                return new KeyValuePair<bool, string>(false, startTime.ToString("HH:mm:ss").Replace(".", ":"));
             }
             else
             {
@@ -34,7 +34,7 @@ namespace WashingAPI.Managers
                     return new KeyValuePair<bool, string>(true, timeLeft.Hours + ":" + timeLeft.Minutes + ":" + timeLeft.Seconds);
                 }
             }
-            return new KeyValuePair<bool, string>(false, startTime.ToString("HH:mm:ss"));
+            return new KeyValuePair<bool, string>(false, startTime.ToString("HH:mm:ss").Replace(".", ":"));
         }
 
         public void UpdateLastAction()

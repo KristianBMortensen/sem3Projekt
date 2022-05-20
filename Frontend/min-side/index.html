@@ -10,6 +10,7 @@
         <link rel="stylesheet" href="/styling/Stylesheet.css">
         <link rel="stylesheet" href="/styling/general.css">
         <link rel="stylesheet" href="/styling/min-vask.css">
+        <link rel="stylesheet" href="/styling/admin.css">
         <meta name="google-signin-client_id" content="842417189442-1vfdnhn31bm7poc2ba3sf5qvhj3dguvj.apps.googleusercontent.com">
         <script src="https://apis.google.com/js/platform.js?onload=init" async defer></script>
         <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
@@ -62,18 +63,21 @@
                     <div class="col-12">
                         <div class="row">
                             <div class="col-3">
-                                <h3 class="kalender-undertitel">Igangværende vask</h3>
+                                <h3 class="kalender-undertitel">Dagens vaske</h3>
                             </div>
                             <div class="col-9">
                                 <div class="current-vaske-box">
-                                    <div class="vask-box-item" >
-                                        <p class="vask-box-item-time">
-                                            Man -- 12-05-2022 -- 7:30-9:00
-                                        </p>
-                                        <div class="vask-box-item-status">
-                                            <p>KLAR TIL AFHENT</p>
+                                    <template v-if="today" v-for="time in today.timeslots">
+                                        <div class="vask-box-item" v-if="time.roomNo == myLogin.room">
+                                            <p class="vask-box-item-time">
+                                                {{today.resDate}} --- {{time.resTime}}
+                                            </p>
+                                            <div class="vask-box-item-status">
+                                                <p v-if="!checkTime(time.resTime)">KLAR TIL AFHENT</p>
+                                                <button v-else class="btn btn-danger" @click="showModel(time.id)">SLET</button>
+                                            </div>
                                         </div>
-                                    </div>
+                                    </template>
                                 </div>
                             </div>
                         </div>
@@ -85,10 +89,34 @@
                             </div>
                             <div class="col-9">
                                 <div class="future-vaske-box">
-
+                                    <template v-if="futureDays" v-for="day in futureDays">
+                                        <template v-for="time in day.timeslots">
+                                            <div class="vask-box-item" v-if="time.roomNo == myLogin.room">
+                                                <p class="vask-box-item-time">
+                                                    {{today.resDate}} --- {{time.resTime}}
+                                                </p>
+                                                <div class="vask-box-item-status">
+                                                    <button class="btn btn-danger" @click="showModel(time.id)">SLET</button>
+                                                </div>
+                                            </div>
+                                        </template>
+                                    </template>
                                 </div>
                             </div>
                         </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="admin-modal" ref="adminModal">
+                <div class="admin-modal-content">
+                    <div class="admin-modal-header">
+                        <h2>ADVARSEL</h2>
+                    </div>
+                    <div class="admin-modal-body">
+                        <p>Er du sikker på at du vil slette denne vasketid?</p>
+                        <button class="btn btn-danger" @click="closeModal()">Nej</button>
+                        <button class="btn btn-success" @click="removeVasketid()">Ja</button>
                     </div>
                 </div>
             </div>

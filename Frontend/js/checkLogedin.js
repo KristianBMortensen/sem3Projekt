@@ -39,7 +39,7 @@ Vue.createApp({
     },
     async created(){
         const loginId = getCookie()
-        if(loginId != "")
+        if(loginId != "" || loginId == "10")
         {
             const response = await axios.get(url+loginId+"/full")
             const data = await response.data
@@ -49,7 +49,6 @@ Vue.createApp({
             }else{
                 this.adminAllowed = false
             }
-            console.log(data)
         }else{
             console.log("admin not allowed")
         }

@@ -12,6 +12,8 @@
     width: 100%;
     height: 210px;
     margin-bottom: 35px;
+    max-height: 210px;
+    overflow: scroll;
 }
 
 .future-vaske-box {
@@ -25,6 +27,7 @@
     width: 100%;
     height: 75px;
     background-color: #C4C4C4;
+    border-bottom: 1px solid gray;
 }
 
 .vask-box-item-time{
