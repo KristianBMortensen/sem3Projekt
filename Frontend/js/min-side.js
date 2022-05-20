@@ -1,4 +1,5 @@
-const url = "https://vasklet.azurewebsites.net//api/Days/"
+const daysURL = "https://vasklet.azurewebsites.net//api/Days/"
+const loginUrl = "https://vasklet.azurewebsites.net//api/Login/"
 
 Vue.createApp({
     data(){
