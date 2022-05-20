@@ -13,81 +13,82 @@
 <html>
 
 
-<head>
-    <title>Oversigt</title>
+    <head>
+        <title>Oversigt</title>
 
 
-</head>
+    </head>
 
-<body>
-    <nav>
-        <div class="logo">
-            <h4>
-                VaskLet
-            </h4>
-        </div>
-        <ul class="nav-links">
-            <li>
-                <a href="/">HOME</a>
-            </li>
-            <li>
-                <a href="/Oversigt/">OVERSIGT</a>
-            </li>
-            <li>
-                <a href="/min-side/">MIN SIDE</a>
-            </li>
-            <li>
-                <a href="/login/logud.html">LOGUD</a>
-            </li>
-            <li>
-                <a href="/kontakt/">KONTAKT</a>
-            </li>
-            <template v-if="adminAllowed">
-                <li>
-                    <a href="/admin/">ADMIN</a>
-                </li>
-            </template>
-
-        </ul>
-        <div class="burger">
-            <div class="line1"></div>
-            <div class="line2"></div>
-            <div class="line3"></div>
-        </div>
-    </nav>
-    
-    <main class="container-fluid" id="app">
-        <div class="row">
-            <div v-for="day in days" class="col-xl-2 col-4" style="padding: 1em;">
-                <table v-if="!day.greenDay" class="table kalender-table" style="height: 100%;">
-                    <thead>
-                        <!-- <th>Tid</th> -->
-                        <th colspan="2">{{day.resDate}}</th>
-                    </thead>
-                    <tbody>
-                        <tr v-for="time in day.timeslots">
-                            <td style="vertical-align: middle">{{time.resTime}}</td>
-                            <td v-if="time.roomNo"><button class="btn" style="color:white; font-weight: 600; pointer-events: none;">{{time.roomNo}}</button></td>
-                            <td v-else><button @click="BookTime(time.id)" class="booking-btn">Book</button></td>
-                        </tr>
-                    </tbody>
-                </table>
-                <div v-else class="green-day-box" style="height: 100%;">
-                    <h3 style="color: white;">{{day.resDate}}</h3>
-                    <p>Fri dag</p>
-                </div>
+    <body>
+        <nav id="navigation">
+            <div class="logo">
+                <h4>
+                    VaskLet
+                </h4>
             </div>
-        </div>  
-    </main>
-    
-    <script src="/js/checkLogedin.js"></script>
-    <script src="/js/Oversigt.js"></script>
+            <ul class="nav-links">
+                <li>
+                    <a href="/">HOME</a>
+                </li>
+                <li>
+                    <a href="/Oversigt/">OVERSIGT</a>
+                </li>
+                <li>
+                    <a href="/min-side/">MIN SIDE</a>
+                </li>
+                <li>
+                    <a href="/login/logud.html">LOGUD</a>
+                </li>
+                <li>
+                    <a href="/kontakt/">KONTAKT</a>
+                </li>
+                <template v-if="adminAllowed">
+                    <li>
+                        <a href="/admin/">ADMIN</a>
+                    </li>   
+                </template>
 
-    <footer>
-        <div class="footer-content">
-            <p>
-                Ved problemer kontakt viceværten på telefon xx xx xx xx eller på email: xxxx@xxxxx.dk
-            </p>
-        </div>
-    </footer>
-</body>
+            </ul>
+            <div class="burger">
+                <div class="line1"></div>
+                <div class="line2"></div>
+                <div class="line3"></div>
+            </div>
+        </nav>
+        
+        <main class="container-fluid" id="app">
+            <div class="row">
+                <div v-for="day in days" class="col-xl-2 col-4" style="padding: 1em;">
+                    <table v-if="!day.greenDay" class="table kalender-table" style="height: 100%;">
+                        <thead>
+                            <!-- <th>Tid</th> -->
+                            <th colspan="2">{{day.resDate}}</th>
+                        </thead>
+                        <tbody>
+                            <tr v-for="time in day.timeslots">
+                                <td style="vertical-align: middle">{{time.resTime}}</td>
+                                <td v-if="time.roomNo"><button class="btn" style="color:white; font-weight: 600; pointer-events: none;">{{time.roomNo}}</button></td>
+                                <td v-else><button @click="BookTime(time.id)" class="booking-btn">Book</button></td>
+                            </tr>
+                        </tbody>
+                    </table>
+                    <div v-else class="green-day-box" style="height: 100%;">
+                        <h3 style="color: white;">{{day.resDate}}</h3>
+                        <p>Fri dag</p>
+                    </div>
+                </div>
+            </div>  
+        </main>
+        
+        <script src="/js/checkLogedin.js"></script>
+        <script src="/js/Oversigt.js"></script>
+
+        <footer>
+            <div class="footer-content">
+                <p>
+                    Ved problemer kontakt viceværten på telefon xx xx xx xx eller på email: xxxx@xxxxx.dk
+                </p>
+            </div>
+        </footer>
+    </body>
+</html>
