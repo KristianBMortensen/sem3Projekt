@@ -1,4 +1,4 @@
-const url = "https://localhost:44323/api/LoginRequest/"
+const url = "https://vasklet.azurewebsites.net//api/LoginRequest/"
 
 const googleId = document.getElementById('google-id')
 const googleStatus = document.getElementById('google-status')

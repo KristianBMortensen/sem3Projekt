@@ -1,4 +1,4 @@
-const URL = "https://localhost:44323/api/LoginRequest/"
+const url = "https://vasklet.azurewebsites.net//api/LoginRequest/"
 
 Vue.createApp({
     data(){

@@ -1,5 +1,5 @@
-const daysURL = "https://localhost:44323/api/Days/"
-const loginUrl = "https://localhost:44323/api/Login/"
+const daysURL = "https://vasklet.azurewebsites.net//api/Days/"
+const loginUrl = "https://vasklet.azurewebsites.net//api/Login/"
 
 Vue.createApp({
     data(){
