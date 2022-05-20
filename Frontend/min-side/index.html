@@ -93,7 +93,7 @@
                                         <template v-for="time in day.timeslots">
                                             <div class="vask-box-item" v-if="time.roomNo == myLogin.room">
                                                 <p class="vask-box-item-time">
-                                                    {{today.resDate}} --- {{time.resTime}}
+                                                    {{day.resDate}} --- {{time.resTime}}
                                                 </p>
                                                 <div class="vask-box-item-status">
                                                     <button class="btn btn-danger" @click="showModel(time.id)">SLET</button>
