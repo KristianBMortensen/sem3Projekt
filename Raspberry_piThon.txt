@@ -1,0 +1,38 @@
+raspberry pi python kode.
+Ligger også som projekt ved navn "vaskeS" i mappen "kristian" i pi med IP 192.168.104.114
+
+
+BROADCAST_TO_PORT = 6969
+import time
+from socket import *
+from datetime import datetime
+
+s = socket(AF_INET, SOCK_DGRAM)
+s.bind(('',6969))     # ip og port
+s.setsockopt(SOL_SOCKET, SO_BROADCAST, 1)
+
+from sense_hat import SenseHat
+hat = SenseHat()
+
+x = round(hat.get_orientation()['pitch'])
+y = round(hat.get_orientation()['roll'])
+
+while True:
+  tæller = 0
+  for i in range(20):
+   oldX = x
+    oldY = y
+    x = round(hat.get_orientation()['pitch'])
+    y = round(hat.get_orientation()['roll'])
+    if abs(x-oldX) > 3 or abs(y-oldY) > 3:
+      if tæller < 5:
+        tæller += 1
+    else:
+      if tæller > -5:
+        tæller -= 1
+    print(tæller)
+    time.sleep(1)
+  data =str(tæller)
+  s.sendto(bytes(data, "UTF-8"), ('<broadcast>', BROADCAST_TO_PORT))
+  print(data)
+  time.sleep(1)
