@@ -1,4 +1,4 @@
-const url = "https://localhost:44323/api/Days/"
+const url = "https://vasklet.azurewebsites.net//api/Days/"
 
 Vue.createApp({
     data(){

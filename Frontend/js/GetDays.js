@@ -1,4 +1,4 @@
-const URL = "https://localhost:44323/api/Days"
+const URL = "https://vasklet.azurewebsites.net//api/Days"
 
 Vue.createApp({
     data(){
@@ -37,7 +37,7 @@ Vue.createApp({
         },
 
         async getARoom(){
-            const url = "https://localhost:44323/api/Login/"
+            const url = "https://vasklet.azurewebsites.net//api/Login/"
             const id = this.getCookie()
             const newUrl = url + id + "/full"
             const response = await axios.get(newUrl)
@@ -65,15 +65,20 @@ Vue.createApp({
 
         getTime(){
             const date = new Date()
-            const hour = date.getUTCHours()+2
-            const minutes = date.getUTCMinutes()
+            const hour = date.getHours()
+            const minutes = date.getMinutes()
 
-            return hour+":"+minutes
+            return date.setHours(hour, minutes)
         },
 
         checkTime(times){
             const timeArray = times.split("-")
-            if(timeArray[0] < this.getTime() && timeArray[1] > this.getTime()){
+            // isnt time lovely
+            let date1 = new Date()
+            let date2 = new Date()
+            let time1 = date1.setHours(timeArray[0].split(":")[0], timeArray[0].split(":")[1])
+            let time2 = date2.setHours(timeArray[1].split(":")[0], timeArray[1].split(":")[1])
+            if(time1 < this.getTime() && time2 > this.getTime()){
                 return true
             }
             return false
@@ -94,7 +99,7 @@ Vue.createApp({
         },
 
         async greenDayHandler(){
-            const greenUrl = "https://localhost:44323/api/GreenDays"
+            const greenUrl = "https://vasklet.azurewebsites.net//api/GreenDays"
             const response = await axios.get(greenUrl)
             const data = await response.data
             const isGreen = await data.key

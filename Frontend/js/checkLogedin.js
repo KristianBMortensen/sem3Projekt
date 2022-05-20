@@ -1,4 +1,4 @@
-const url = "https://localhost:44323/api/Login/"
+const url = "https://vasklet.azurewebsites.net//api/Login/"
 
 window.onload = function(){
     checkCookie()
