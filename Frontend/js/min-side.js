@@ -1,4 +1,4 @@
-const daysURL = "https://vasklet.azurewebsites.net//api/Days/"
+const daysURL = "https://vasklet.azurewebsites.net/api/Days/"
 const loginUrl = "https://vasklet.azurewebsites.net//api/Login/"
 
 Vue.createApp({
@@ -19,12 +19,10 @@ Vue.createApp({
             const dateUrl = (daysURL+date)
             const response = await axios.get(dateUrl)
             const result = await response.data
-            
             this.today = result
 
             const futureResponse = await axios.get(daysURL+"?room="+this.myLogin.room)
             const futureData = await futureResponse.data
-
             let futureDaysArray = []
 
            for(let i = 0; i < futureData.length; i++){
@@ -39,11 +37,9 @@ Vue.createApp({
             const date = new Date()
             const year = date.getFullYear()
             date.setDate(date.getDate() + future)
-            date.setMonth(date.getMonth()+1)
-
+            date.setMonth(date.getMonth())
             let day = date.getDate()
-            let month = date.getMonth()
-
+            let month = date.getMonth()+1
             if(day < 10){
                 day = "0"+day
             }
@@ -60,24 +56,20 @@ Vue.createApp({
         checkStringDate(date){
             let day = date.split('-')[0]
             let month = date.split('-')[1]
-            let year = date.split('')[2]
-
+            let year = date.split('-')[2]
             day = parseInt(day)
             month = parseInt(month)
             year = parseInt(year)
 
             const today = new Date()
+            if(year > today.getFullYear())
+                return true
+            if(month > today.getMonth()+1)
+                return true                
+            if(day > today.getDate())
+                return true
 
-            if(day <= today.getDate())
-                return false
-            
-            if(month <= today.getMonth())
-                return false
-
-            if(year < today.getFullYear())
-                return false
-            
-            return true
+            return false
         },
         getTime(){
             const date = new Date()
